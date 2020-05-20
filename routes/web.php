@@ -14,5 +14,8 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
-});
+    return view('layouts.app');
+})->name('dashboard');
+
+Route::livewire('/login', 'auth.login')->name('auth.login')
+    ->layout('layouts.auth');
