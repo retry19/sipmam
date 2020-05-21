@@ -10,13 +10,14 @@ use Tests\TestCase;
 class AuthenticationTest extends TestCase
 {
     use RefreshDatabase;
-    /**
-     * A basic feature test example.
-     *
-     * @return void
-     */
 
-    public function can_login()
+    public function test_go_to_login_page()
+    {
+        $response = $this->get('/login');
+        $response->assertStatus(200);
+    }
+
+    public function test_user_can_login()
     {
         $user = factory('App\User')->create();
         $this->actingAs($user);
@@ -30,10 +31,32 @@ class AuthenticationTest extends TestCase
         $this->assertAuthenticatedAs($user);
     }
 
-    public function testExample()
+    public function test_wrong_password_and_show_error_message()
     {
-        $response = $this->get('/');
+        $user = factory('App\User')->create();
+        $this->actingAs($user);
 
-        $response->assertStatus(200);
+        Livewire::test(Login::class)
+            ->set('username', $user->username)
+            ->set('password', 'password123')
+            ->call('login')
+            ->assertSee('Username atau Password yang anda masukan salah ☹');
     }
+
+    public function test_user_not_input_username_then_show_message_validation()
+    {
+        Livewire::test(Login::class)
+            ->set('username', '')
+            ->call('login')
+            ->assertSee('The username field is required.');
+    }
+
+    public function test_user_not_input_password_then_show_message_validation()
+    {
+        Livewire::test(Login::class)
+            ->set('password', '')
+            ->call('login')
+            ->assertSee('The password field is required.');
+    }
+
 }
