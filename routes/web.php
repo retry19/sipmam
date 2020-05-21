@@ -19,3 +19,7 @@ Route::get('/', function () {
 
 Route::livewire('/login', 'auth.login')->name('auth.login')
     ->layout('layouts.auth');
+
+Route::group(['middleware' => 'auth'], function () {
+    
+});

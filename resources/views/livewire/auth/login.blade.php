@@ -6,6 +6,9 @@
         @if (session()->has('error'))
             <div class="alert alert-danger" role="alert">{{ session('error') }}</div>
         @endif
+        @if (session()->has('success'))
+            <div class="alert alert-success" role="alert">{{ session('success') }}</div>
+        @endif
         <form wire:submit.prevent="login">
             <div class="form-group">
                 <input wire:model.debounce.500ms="username" type="text" class="form-control" placeholder="Masukan username anda">
