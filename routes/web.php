@@ -15,7 +15,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('layouts.app');
-})->name('dashboard');
+})->name('dashboard')->middleware('auth');
 
 Route::livewire('/login', 'auth.login')->name('auth.login')
     ->layout('layouts.auth');
