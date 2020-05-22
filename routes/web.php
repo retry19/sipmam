@@ -15,11 +15,11 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('layouts.app');
-})->name('dashboard')->middleware('auth');
+})->name('dashboard');
 
 Route::livewire('/login', 'auth.login')->name('auth.login')
     ->layout('layouts.auth');
 
 Route::group(['middleware' => 'auth'], function () {
-    
+    Route::livewire('/order', 'pelayan.order-index')->name('order.index');
 });

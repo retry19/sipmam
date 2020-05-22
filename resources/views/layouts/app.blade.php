@@ -12,7 +12,10 @@
   <link rel="stylesheet" href="{{ asset('vendor/overlayScrollbars/css/OverlayScrollbars.min.css') }}">
   <link rel="stylesheet" href="{{ asset('css/adminlte.min.css') }}">
   <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
-  @include('sweetalert::alert')
+  <link rel="stylesheet" href="{{ asset('css/app.css') }}">
+  @yield('css')
+  <livewire:styles />
+  <livewire:scripts />
 </head>
 
 <body class="hold-transition sidebar-mini layout-navbar-fixed layout-fixed">
@@ -72,7 +75,7 @@
             <img src="{{ asset('img/user2-160x160.jpg') }}" class="img-circle elevation-2" alt="User Image">
           </div>
           <div class="info">
-            <a href="#" class="d-block">Alexander Pierce</a>
+            <a href="#" class="d-block">{{ auth()->user()->nama }}</a>
           </div>
         </div>
 
@@ -82,14 +85,14 @@
             <!-- Add icons to the links using the .nav-icon class
                 with font-awesome or any other icon font library -->
             <li class="nav-item">
-              <a href="#" class="nav-link active">
+              <a href="{{ url('/') }}" class="nav-link active">
                 <i class="nav-icon fas fa-tachometer-alt"></i>
                 <p>Dashboard</p>
               </a>
             </li>
             <li class="nav-header">PELAYAN</li>
             <li class="nav-item">
-              <a href="" class="nav-link">
+              <a href="{{ url('/order') }}" class="nav-link">
                 <i class="nav-icon fas fa-shopping-bag"></i>
                 <p>Order</p>
               </a>
@@ -106,7 +109,6 @@
             <li class="nav-header">OPTION</li>
             <li class="nav-item">
               <livewire:auth.logout />
-              {{ auth()->user()->nama }}
             </li>
           </ul>
         </nav>
@@ -122,7 +124,7 @@
         <div class="container-fluid">
           <div class="row mb-2">
             <div class="col-sm-6">
-              <h1 class="m-0 text-dark">Dashboard</h1>
+              <h1 class="m-0 text-dark">@yield('heading')</h1>
             </div><!-- /.col -->
             <div class="col-sm-6">
               <ol class="breadcrumb float-sm-right">
@@ -163,11 +165,16 @@
 
   <!-- REQUIRED SCRIPTS -->
 
+  <script src="{{ asset('js/app.js') }}"></script>
   <!-- jQuery -->
   <script src="{{ asset('js/jquery.min.js') }}"></script>
   <!-- Bootstrap -->
   <script src="{{ asset('js/bootstrap.bundle.min.js') }}"></script>
   <script src="{{ asset('vendor/overlayScrollbars/js/jquery.overlayScrollbars.min.js') }}"></script>
+
+  <!-- Masonry -->
+  <script src="{{ asset('js/masonry.min.js') }}"></script>
+
   <!-- AdminLTE -->
   <script src="{{ asset('js/adminlte.js') }}"></script>
 
@@ -175,5 +182,6 @@
   <script src="{{ asset('js/Chart.min.js') }}"></script>
   <script src="{{ asset('js/demo.js') }}"></script>
   <script src="{{ asset('js/dashboard3.js') }}"></script>
+  @yield('js')
 </body>
 </html>

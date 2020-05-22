@@ -9,7 +9,6 @@
   <link rel="stylesheet" href="{{ asset('css/app.css') }}">
   <livewire:styles />
   <livewire:scripts />
-  @include('sweetalert::alert')
 </head>
 <body>
   <div class="row align-items-center" style="min-height: 100vh">
