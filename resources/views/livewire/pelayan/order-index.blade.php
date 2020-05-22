@@ -1,5 +1,6 @@
 <div class="row">
     <div class="col-md-12">
+        {{ $hashids }}
         <div class="grid" data-masonry='{ "itemSelector": ".grid-item", "percentPosition": true}'>
             <div class="grid-item">
                 <div class="card">
