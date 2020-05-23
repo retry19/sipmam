@@ -2,3 +2,111 @@
   margin-left: 0;
   margin-right: 0;
 }
+
+/* HALAMAN ORDER (pelayan) */
+.grid-item {
+  padding-bottom: 10px;
+  padding-right: 10px;
+  padding-left: 10px;
+  width: 50%;
+}
+.grid-item .card {
+  box-shadow: none;
+  border-radius: 10px;
+  transition: all .3s;
+  transform: scale(1);
+}
+.grid-item .card:hover {
+  cursor: pointer;
+  background-color: khaki;
+  transform: scale(1.1);
+}
+.grid-item .card .card-img-top {
+  border-radius: 10px;
+}
+.grid-item .card .card-body footer {
+  font-weight: 300;
+}
+
+.list-menu {
+  position: sticky;
+  padding: 0 10px;
+  margin-bottom: 20px;
+}
+.list-menu .search-icon {
+  border-top-left-radius: 10px;
+  border-bottom-left-radius: 10px;
+  border: none;
+}
+.list-menu .search-field {
+  border-radius: 10px;
+  border: none;
+}
+.list-menu ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  font-size: .9rem;
+  display: flex;
+  flex-wrap: nowrap;
+  flex-direction: row;
+  align-items: center;
+  overflow-x: scroll;
+  overflow-y: hidden;
+  white-space: nowrap;
+  justify-content: space-between;
+  -webkit-mask-image: linear-gradient(90deg,transparent,#fff 0,#fff 90%,transparent);
+}
+.list-menu ul li {
+  display: inline-block;
+  margin-left: 20px;
+  padding: 10px 30px;
+  border-radius: 10px;
+  background-color: #fff;
+}
+.list-menu ul li:nth-child(1) {
+  margin-left: 0;
+}
+.list-menu ul li:hover {
+  background-color: khaki;
+}
+.list-menu ul li.active {
+  background-color: lightgreen;
+}
+
+@media (min-width: 575px) {
+  .grid-item {
+    width: 25%;
+  }
+
+  .grid-item .card .card-body {
+    padding: 10px;
+  }
+}
+
+@media (min-width: 768px) {
+  .grid-item .card .card-body {
+    padding: 20px;
+  }
+
+  .list-menu {
+    top: 70px;
+  }
+  .list-menu ul {
+    display: block;
+    -webkit-mask-image: none;
+    overflow-x: hidden;
+  }
+  .list-menu ul li {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 0;
+    margin-top: 10px;
+    padding: 10px 20px;
+    width: 100%;
+  }
+  .list-menu ul li:nth-child(1) {
+    margin: 0;
+  }
+}

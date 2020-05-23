@@ -11,7 +11,7 @@
   <link rel="stylesheet" href="http://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
   <link rel="stylesheet" href="{{ asset('vendor/overlayScrollbars/css/OverlayScrollbars.min.css') }}">
   <link rel="stylesheet" href="{{ asset('css/adminlte.min.css') }}">
-  <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,500,700" rel="stylesheet">
   <link rel="stylesheet" href="{{ asset('css/app.css') }}">
   @yield('css')
   <livewire:styles />
@@ -82,8 +82,6 @@
         <!-- Sidebar Menu -->
         <nav class="mt-2">
           <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
-            <!-- Add icons to the links using the .nav-icon class
-                with font-awesome or any other icon font library -->
             <li class="nav-item">
               <a href="{{ url('/') }}" class="nav-link active">
                 <i class="nav-icon fas fa-tachometer-alt"></i>
@@ -139,9 +137,7 @@
 
       <!-- Main content -->
       <div class="content">
-        <div class="container-fluid">
-          @yield('content')
-        </div>
+        @yield('content')
       </div>
       <!-- /.content -->
     </div>
