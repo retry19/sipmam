@@ -85,6 +85,29 @@
   cursor: auto;
 }
 
+aside.control-sidebar {
+  overflow-y: auto;
+}
+
+.cart-list {
+  margin: 0;
+  padding: 36px 12px;
+}
+.cart-list ul {
+  margin: 0;
+  padding: 0;
+}
+.cart-list .card {
+  background-color: #3e454d;
+  border-radius: 10px;
+  box-shadow: none;
+}
+.cart-list .card .card-body .qty {
+  font-size: 1rem;
+  color: rgb(255, 244, 244);
+  font-weight: 500;
+}
+
 @media (min-width: 575px) {
   .grid-item {
     width: 25%;

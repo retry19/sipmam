@@ -1,18 +1,18 @@
 <div class="cart-list">
-    <h4>Daftar Pesanan</h4>
+    <h4 class="mb-4">Daftar Pesanan</h4>
     <ul>
         @foreach ($cartDetail as $item)
             <li class="card">
                 <div class="card-body">
-                    <img src="" alt="">
-                    <div>
-                        <p>{{ $item['nama_menu'] }}</p>
-                        <p>{{ $item['harga'] }}</p>
-                        <div>
-                            <button>-</button>
-                            <span>0</span>
-                            <button>+</button>
-                        </div>
+                    <h5 class="card-title">{{ $item['nama_menu'] }}</h5>
+                    <p class="card-text">Rp. {{ $item['harga'] }}</p>
+                    <div class="d-flex w-100 justify-content-between mt-2">
+                        <span>
+                            <button class="btn btn-info btn-sm"><i class="fas fa-minus text-white"></i></button>
+                            <span class="qty mx-2">1</span>
+                            <button class="btn btn-info btn-sm"><i class="fas fa-plus text-white"></i></button>
+                        </span>
+                        <button class="btn btn-danger btn-sm"><i class="fas fa-times"></i></button>
                     </div>
                 </div>
             </li>
