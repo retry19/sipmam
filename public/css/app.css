@@ -21,6 +21,13 @@
   background-color: khaki;
   transform: scale(1.1);
 }
+.grid-item .card.active {
+  background-color: khaki;
+}
+.grid-item .card:hover.active {
+  background-color: khaki;
+  transform: none;
+}
 .grid-item .card .card-img-top {
   border-radius: 10px;
 }

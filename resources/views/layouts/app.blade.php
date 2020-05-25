@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta http-equiv="x-ua-compatible" content="ie=edge">
 
-  <title>AdminLTE 3 | Dashboard 3</title>
+  <title>@yield('title') :: Sipmam</title>
 
   <link rel="stylesheet" href="{{ asset('vendor/fontawesome-free/css/all.min.css') }}">
   <link rel="stylesheet" href="http://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
@@ -49,10 +49,7 @@
           </div>
         </li>
         <li class="nav-item">
-          <a class="nav-link" data-widget="control-sidebar" data-slide="true" href="#" role="button">
-            <i class="fas fa-shopping-cart"></i>
-            <span class="badge badge-warning navbar-badge">15</span>
-          </a>
+          <livewire:pelayan.cart-icon />
         </li>
       </ul>
     </nav>
@@ -83,20 +80,20 @@
         <nav class="mt-2">
           <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
             <li class="nav-item">
-              <a href="{{ url('/') }}" class="nav-link active">
+              <a href="{{ url('/') }}" class="nav-link @yield('dashboard')">
                 <i class="nav-icon fas fa-tachometer-alt"></i>
                 <p>Dashboard</p>
               </a>
             </li>
             <li class="nav-header">PELAYAN</li>
             <li class="nav-item">
-              <a href="{{ url('/order') }}" class="nav-link">
+              <a href="{{ url('/order') }}" class="nav-link @yield('order')">
                 <i class="nav-icon fas fa-shopping-bag"></i>
                 <p>Order</p>
               </a>
             </li>
             <li class="nav-item">
-              <a href="" class="nav-link">
+              <a href="" class="nav-link @yield('pesanan')">
                 <i class="nav-icon fas fa-calendar-alt"></i>
                 <p>
                   Pesanan
@@ -127,7 +124,7 @@
             <div class="col-sm-6">
               <ol class="breadcrumb float-sm-right">
                 <li class="breadcrumb-item"><a href="#">Home</a></li>
-                <li class="breadcrumb-item active">Dashboard</li>
+                <li class="breadcrumb-item active">@yield('title')</li>
               </ol>
             </div><!-- /.col -->
           </div><!-- /.row -->
@@ -146,6 +143,7 @@
     <!-- Control Sidebar -->
     <aside class="control-sidebar control-sidebar-dark">
       <!-- Control sidebar content goes here -->
+      <livewire:pelayan.cart-list />
     </aside>
     <!-- /.control-sidebar -->
 
@@ -176,7 +174,7 @@
 
   <!-- OPTIONAL SCRIPTS -->
   <script src="{{ asset('js/Chart.min.js') }}"></script>
-  <script src="{{ asset('js/demo.js') }}"></script>
+  {{-- <script src="{{ asset('js/demo.js') }}"></script> --}}
   <script src="{{ asset('js/dashboard3.js') }}"></script>
   @yield('js')
 </body>
