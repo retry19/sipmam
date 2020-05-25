@@ -68,10 +68,14 @@
   margin-left: 0;
 }
 .list-menu ul li:hover {
+  cursor: pointer;
   background-color: khaki;
 }
 .list-menu ul li.active {
   background-color: lightgreen;
+}
+.list-menu ul li:hover.active {
+  cursor: auto;
 }
 
 @media (min-width: 575px) {
