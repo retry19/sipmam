@@ -8,11 +8,17 @@
                     <p class="card-text">Rp. {{ $item['harga'] }}</p>
                     <div class="d-flex w-100 justify-content-between mt-2">
                         <span>
-                            <button class="btn btn-info btn-sm"><i class="fas fa-minus text-white"></i></button>
-                            <span class="qty mx-2">1</span>
-                            <button class="btn btn-info btn-sm"><i class="fas fa-plus text-white"></i></button>
+                            <button wire:click="minusItem({{ $item['id'] }})" class="btn btn-info btn-sm">
+                                <i class="fas fa-minus text-white"></i>
+                            </button>
+                            <span class="qty mx-2">{{ $item['qty'] }}</span>
+                            <button wire:click="plusItem({{ $item['id'] }})" class="btn btn-info btn-sm">
+                                <i class="fas fa-plus text-white"></i>
+                            </button>
                         </span>
-                        <button class="btn btn-danger btn-sm"><i class="fas fa-times"></i></button>
+                        <button wire:click="$emit('removeItemCart', {{ $item['id'] }})" class="btn btn-danger btn-sm">
+                            <i class="fas fa-times"></i>
+                        </button>
                     </div>
                 </div>
             </li>

@@ -11,7 +11,10 @@ class OrderIndex extends Component
     public $menuSearch = null;
     public $cart = [];
 
-    protected $listeners = ['menuSelected' => 'handleMenuSelected'];
+    protected $listeners = [
+        'menuSelected' => 'handleMenuSelected',
+        'removeItemCart' => 'handleRemoveItem',
+    ];
 
     public function handleMenuSelected($id) {
         if (!in_array($id, $this->cart)) {
@@ -23,6 +26,13 @@ class OrderIndex extends Component
 
     public function handleCategorySelected($category) {
         $this->categorySelected = $category;
+    }
+
+    public function handleRemoveItem($id)
+    {
+        if (in_array($id, $this->cart)) {
+            $this->cart = array_diff($this->cart, array($id));
+        }
     }
 
     public function render()

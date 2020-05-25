@@ -9,7 +9,10 @@ class CartIcon extends Component
     public $countOfCart = 0;
     public $cart = [];
 
-    protected $listeners = ['menuSelected' => 'handleCountOfCart'];
+    protected $listeners = [
+        'menuSelected' => 'handleCountOfCart',
+        'removeItemCart' => 'handleRemoveItem'
+    ];
 
     public function handleCountOfCart($id)
     {
@@ -18,6 +21,14 @@ class CartIcon extends Component
         } else {
             $this->cart = array_diff($this->cart, array($id));
         }
+
+        $this->countOfCart = count($this->cart);
+    }
+
+    public function handleRemoveItem($id)
+    {
+        if (in_array($id, $this->cart))
+            $this->cart = array_diff($this->cart, array($id));
 
         $this->countOfCart = count($this->cart);
     }
