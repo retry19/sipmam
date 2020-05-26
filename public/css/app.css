@@ -3,6 +3,10 @@
   margin-right: 0;
 }
 
+.main-header {
+  border-bottom: none;
+}
+
 /* HALAMAN ORDER (pelayan) */
 .grid-item {
   padding-bottom: 10px;

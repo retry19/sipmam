@@ -26,7 +26,7 @@
         </div>
     </div>
     <div class="col-md-9">
-        <div class="grid">
+        <div class="grid" id="grid">
             @foreach ($menus as $menu)
                 <div wire:click="$emit('menuSelected', {{ $menu->id }})" class="grid-item">
                     <div class="card {{ in_array($menu->id, $cart) ? 'active' : '' }}">
@@ -49,15 +49,18 @@
 @section('heading', 'Daftar Menu')
 @section('js')
     <script>
-        let options = {
-            "itemSelector": ".grid-item",
-            "percentPosition": true
-        };
+        let elmn = document.getElementById('grid');
+        if (elmn != null) {
+            let options = {
+                "itemSelector": ".grid-item",
+                "percentPosition": true
+            };
 
-        let msnry = new Masonry('.grid', options);
-        
-        setInterval(() => {
-            msnry = new Masonry('.grid', options);
-        }, 200);
+            let msnry = new Masonry('.grid', options);
+            
+            setInterval(() => {
+                msnry = new Masonry('.grid', options);
+            }, 200);
+        }
     </script>
 @endsection
