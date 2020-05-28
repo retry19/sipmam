@@ -54,9 +54,9 @@
                             </td>
                             <td>{{ $item->updated_at->diffForHumans() }}</td>
                             <td>
-                                <button class="btn btn-sm btn-secondary">
+                                <a href="#detailModal" class="btn btn-sm btn-secondary" data-toggle="modal" data-pesanan="{{ $item->id }}">
                                     <i class="fas fa-search"></i>
-                                </button>
+                                </a>
                                 <button class="btn btn-sm btn-warning">
                                     <i class="fas fa-edit"></i>
                                 </button>
@@ -67,24 +67,72 @@
             </table>
             {{ $pesanan->links() }}
         </div>
-        {{-- <div class="grid" id="grid">
-            @foreach ($menus as $menu)
-                <div wire:click="$emit('menuSelected', {{ $menu->id }})" class="grid-item">
-                    <div class="card {{ in_array($menu->id, $cart) ? 'active' : '' }}">
-                        <img src="{{ asset('img/foods/'.$menu->foto_menu) }}" class="card-img-top" alt="{{ $menu->nama_menu }}">
-                        <div class="card-body">
-                            <h5 class="card-title">{{ $menu->nama_menu }}</h5>
-                            <br>
-                            <footer>Rp. {{ $menu->harga }}</footer>
-                        </div>
+    </div>
+
+    <!-- Modal -->
+    <div class="modal fade" id="detailModal" tabindex="-1" role="dialog" aria-labelledby="detailModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="detailModalLabel">Detail Pesanan</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="table-responsive">
+                        <table class="table table-bordered">
+                            <thead class="thead-light">
+                                <tr class="text-center">
+                                    <th scope="col">Nama Menu</th>
+                                    <th scope="col">Jumlah</th>
+                                    <th scope="col">Harga</th>
+                                    <th scope="col">Total Harga</th>
+                                </tr>
+                            </thead>
+                            <tbody id="table-body"></tbody>
+                        </table>
+                        {{ $pesanan->links() }}
                     </div>
                 </div>
-            @endforeach
+            </div>
         </div>
-        {{ $menus->links() }} --}}
     </div>
+
 </div>
 
 @section('title', 'Pesanan')
 @section('pesanan', 'active')
 @section('heading', 'Daftar Pesanan')
+
+@section('js')
+    <script>
+        $('#detailModal').on('show.bs.modal', function(e) {
+            let pesananId = $(e.relatedTarget).data('pesanan');
+
+            $.ajax({
+                method: 'GET',
+                url: `ajax/pesanan/${pesananId}/list`,
+                success: function(res) {
+                    // console.log(res);
+                    let body = document.getElementById('table-body');
+                    
+                    while (body.hasChildNodes()) {  
+                       body.removeChild(body.firstChild);
+                    }
+
+                    res.forEach(val => {
+                        body.insertAdjacentHTML('beforeend', `
+                            <tr class="text-center">
+                                <td>${val.nama_menu}</td>
+                                <td>${val.jml_pesan}</td>
+                                <td>Rp. ${val.harga}</td>
+                                <td>Rp. ${val.harga * val.jml_pesan}</td>
+                            </tr>
+                        `);
+                    });
+                }
+            });
+        });
+    </script>
+@endsection
