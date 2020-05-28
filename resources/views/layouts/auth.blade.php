@@ -5,7 +5,10 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>Login :: {{ config('app.name') }}</title>
-  <link rel="stylesheet" href="{{ asset('css/bootstrap.min.css') }}">
+  <link rel="stylesheet" href="{{ asset('vendor/fontawesome-free/css/all.min.css') }}">
+  <link rel="stylesheet" href="http://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+  <link rel="stylesheet" href="{{ asset('vendor/overlayScrollbars/css/OverlayScrollbars.min.css') }}">
+  <link rel="stylesheet" href="{{ asset('css/adminlte.min.css') }}">
   <link rel="stylesheet" href="{{ asset('css/app.css') }}">
   <livewire:styles />
   <livewire:scripts />
@@ -23,6 +26,13 @@
   </footer>
 
   <script src="{{ asset('js/app.js') }}"></script>
-  <script src="{{ asset('js/bootstrap.min.js') }}"></script>
+  <script src="{{ asset('js/jquery.min.js') }}"></script>
+  <!-- Bootstrap -->
+  <script src="{{ asset('js/bootstrap.bundle.min.js') }}"></script>
+
+  <script src="{{ asset('vendor/overlayScrollbars/js/jquery.overlayScrollbars.min.js') }}"></script>
+  <script src="{{ asset('js/adminlte.js') }}"></script>
+  <script src="{{ asset('js/dashboard3.js') }}"></script>
+  @yield('js')
 </body>
 </html>

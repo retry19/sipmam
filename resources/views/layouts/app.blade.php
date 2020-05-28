@@ -80,14 +80,14 @@
         <nav class="mt-2">
           <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
             <li class="nav-item">
-              <a href="{{ url('/') }}" class="nav-link @yield('dashboard')">
+              <a href="{{ route('dashboard') }}" class="nav-link @yield('dashboard')">
                 <i class="nav-icon fas fa-tachometer-alt"></i>
                 <p>Dashboard</p>
               </a>
             </li>
             <li class="nav-header">PELAYAN</li>
             <li class="nav-item">
-              <a href="{{ url('/order') }}" class="nav-link @yield('order')">
+              <a href="{{ route('order.index') }}" class="nav-link @yield('order')">
                 <i class="nav-icon fas fa-shopping-bag"></i>
                 <p>Order</p>
               </a>

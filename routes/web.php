@@ -13,13 +13,17 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('layouts.app');
-})->name('dashboard');
 
-Route::livewire('/login', 'auth.login')->name('auth.login')
-    ->layout('layouts.auth');
+Route::group(['middleware' => 'guest'], function() {
+    Route::get('/', function() {
+        return 'index <a href="/login">klik disini</a> untuk login, halaman home user ny blum buat 😔';
+    });
+    Route::livewire('/login', 'auth.login')->name('auth.login')
+        ->layout('layouts.auth');
+});
 
-Route::group(['middleware' => 'auth'], function () {
+
+Route::group(['middleware' => 'auth', 'prefix' => 'dashboard'], function () {
+    Route::get('/', function() { return view('layouts.app'); })->name('dashboard');
     Route::livewire('/order', 'pelayan.order-index')->name('order.index');
 });
