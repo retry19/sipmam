@@ -14,7 +14,19 @@ class OrderIndex extends Component
     protected $listeners = [
         'menuSelected' => 'handleMenuSelected',
         'removeItemCart' => 'handleRemoveItem',
+        'cancelOrder' => 'handleCancelOrder',
+        'submitOrder' => 'handleSubmitOrder'
     ];
+
+    public function handleSubmitOrder($totalHarga)
+    {
+        $this->handleCancelOrder();
+    }
+
+    public function handleCancelOrder()
+    {
+        $this->cart = [];
+    }
 
     public function handleMenuSelected($id) {
         if (!in_array($id, $this->cart)) {

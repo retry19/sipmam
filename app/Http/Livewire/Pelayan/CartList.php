@@ -3,17 +3,74 @@
 namespace App\Http\Livewire\Pelayan;
 
 use App\Menu;
+use App\DetailPesanan;
+use App\Pesanan;
+use Carbon\Carbon;
 use Livewire\Component;
+use Illuminate\Support\Facades\Auth;
 
 class CartList extends Component
 {
     public $cart = [];
     public $cartDetail = [];
+    public $noMeja;
+    public $validNoMeja = 0;
 
     protected $listeners = [
         'menuSelected' => 'handleShowCartList',
-        'removeItemCart' => 'handleRemoveItem'
+        'removeItemCart' => 'handleRemoveItem',
+        'cancelOrder' => 'handleCancelOrder',
+        'submitOrder' => 'handleSubmitOrder',
     ];
+
+    public function updated($field)
+    {
+        if ($this->noMeja != null) {
+            $this->validNoMeja = Pesanan::whereDate('created_at', Carbon::today())
+                ->where('no_meja', $this->noMeja)
+                ->count();
+        }
+    }
+
+
+    public function handleSubmitOrder($totalHarga)
+    {
+        try {
+            $pesanan = new Pesanan;
+            $pesanan->user_id = Auth::user()->id;
+            $pesanan->no_meja = $this->noMeja;
+            $pesanan->total_harga = $totalHarga;
+            $pesanan->save();
+        } catch (\Exception $e) {
+            throw $e;
+        }
+
+        foreach ($this->cartDetail as $item) {
+            try {
+                DetailPesanan::create([
+                    'pesanan_id' => $pesanan->id,
+                    'menu_id' => $item['id'],
+                    'jml_pesan' => $item['qty']
+                ]);
+
+                $menu = Menu::find($item['id']);     
+
+                $menu->jml_dipesan += $item['qty'];
+                $menu->save();
+            } catch (\Exception $e) {
+                throw $e;
+            }
+        }
+        $this->handleCancelOrder();
+
+        return redirect()->route('order.index');
+    }
+
+    public function handleCancelOrder()
+    {
+        $this->cart = [];
+        $this->cartDetail = [];
+    }
 
     public function plusItem($id)
     {

@@ -11,8 +11,21 @@ class CartIcon extends Component
 
     protected $listeners = [
         'menuSelected' => 'handleCountOfCart',
-        'removeItemCart' => 'handleRemoveItem'
+        'removeItemCart' => 'handleRemoveItem',
+        'cancelOrder' => 'handleCancelOrder',
+        'submitOrder' => 'handleSubmitOrder'
     ];
+
+    public function handleSubmitOrder($totalHarga)
+    {
+        $this->handleCancelOrder();
+    }
+
+    public function handleCancelOrder()
+    {
+        $this->countOfCart = 0;
+        $this->cart = [];
+    }
 
     public function handleCountOfCart($id)
     {
