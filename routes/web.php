@@ -26,4 +26,5 @@ Route::group(['middleware' => 'guest'], function() {
 Route::group(['middleware' => 'auth', 'prefix' => 'dashboard'], function () {
     Route::get('/', function() { return view('layouts.app'); })->name('dashboard');
     Route::livewire('/order', 'pelayan.order-index')->name('order.index');
+    Route::livewire('/pesanan', 'pelayan.pesanan-index')->name('pesanan.index');
 });
