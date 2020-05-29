@@ -18,8 +18,8 @@ class CreateMenusTable extends Migration
             $table->string('nama_menu', 32);
             $table->string('foto_menu');
             $table->enum('jenis_menu', ['makanan', 'minuman']);
-            $table->unsignedInteger('jml_tersedia');
-            $table->unsignedInteger('jml_dipesan');
+            $table->unsignedTinyInteger('jml_tersedia');
+            $table->unsignedTinyInteger('jml_dipesan')->default(0);
             $table->integer('harga');
         });
     }
