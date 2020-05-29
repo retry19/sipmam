@@ -93,21 +93,18 @@
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
-                <div class="modal-body">
-                    <div class="table-responsive">
-                        <table class="table table-bordered">
-                            <thead class="thead-light">
-                                <tr class="text-center">
-                                    <th scope="col">Nama Menu</th>
-                                    <th scope="col">Jumlah</th>
-                                    <th scope="col">Harga</th>
-                                    <th scope="col">Total Harga</th>
-                                </tr>
-                            </thead>
-                            <tbody id="table-body"></tbody>
-                        </table>
-                        {{ $pesanan->links() }}
-                    </div>
+                <div class="modal-body table-responsive p-0">
+                    <table class="table table-hover">
+                        <thead>
+                            <tr class="text-center">
+                                <th scope="col">Nama Menu</th>
+                                <th scope="col">Jumlah</th>
+                                <th scope="col">Harga</th>
+                                <th scope="col">Total Harga</th>
+                            </tr>
+                        </thead>
+                        <tbody id="table-body"></tbody>
+                    </table>
                 </div>
             </div>
         </div>
@@ -128,7 +125,6 @@
                 method: 'GET',
                 url: `ajax/pesanan/${pesananId}/list`,
                 success: function(res) {
-                    // console.log(res);
                     let body = document.getElementById('table-body');
                     
                     while (body.hasChildNodes()) {  
@@ -138,7 +134,7 @@
                     res.forEach(val => {
                         body.insertAdjacentHTML('beforeend', `
                             <tr class="text-center">
-                                <td>${val.nama_menu}</td>
+                                <td class="text-left">${val.nama_menu}</td>
                                 <td>${val.jml_pesan}</td>
                                 <td>Rp. ${val.harga}</td>
                                 <td>Rp. ${val.harga * val.jml_pesan}</td>
