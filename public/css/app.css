@@ -127,6 +127,11 @@ aside.control-sidebar {
   padding: 0;
 }
 
+.cart-list .card-body.loading {
+  opacity: .65;
+  cursor: not-allowed;
+}
+
 .btn-disabled {
   display: none;
 }

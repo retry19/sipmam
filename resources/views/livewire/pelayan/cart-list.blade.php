@@ -7,7 +7,7 @@
         <ul>
             @foreach ($cartDetail as $item)
                 <li class="card">
-                    <div class="card-body">
+                    <div wire:loading.class="loading" class="card-body">
                         <h5 class="card-title">{{ $item['nama_menu'] }}</h5>
                         <p class="card-text">Rp. {{ $item['harga'] }}</p>
                         <div class="d-flex w-100 justify-content-between mt-2">
@@ -37,7 +37,7 @@
             <p>Total Harga :</p>
             <h4>Rp. {{ $totalHarga }}</h4>
         </div>
-        <button wire:click="$emit('submitOrder', {{ $totalHarga }})" class="btn btn-primary w-100 mb-2 <?php if($noMeja == null || $validNoMeja != 0) { echo 'btn-disabled'; } else { echo ''; } ?>">Order</button>
-        <button wire:click="$emit('cancelOrder')" class="btn btn-outline-secondary w-100 text-white">Batal</button>
+        <button wire:click="$emit('submitOrder', {{ $totalHarga }})" class="btn btn-primary w-100 mb-2 <?php if($noMeja == null || $validNoMeja != 0) { echo 'btn-disabled'; } else { echo ''; } ?>" wire:loading.class="disabled">Order</button>
+        <button wire:click="$emit('cancelOrder')" class="btn btn-outline-secondary w-100 text-white" wire:loading.class="disabled">Batal</button>
     @endif
 </div>
