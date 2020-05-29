@@ -26,53 +26,60 @@
         </div>
     </div>
     <div class="col-md-9">
-        <div class="table-responsive">
-            <table class="table table-bordered bg-white table-hover">
-                <thead class="thead-light">
-                    <tr class="text-center">
-                        <th scope="col">#</th>
-                        <th scope="col">No. Meja</th>
-                        <th scope="col">Total Harga</th>
-                        <th scope="col">Status</th>
-                        <th scope="col">Waktu</th>
-                        <th scope="col">Opsi</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @if (count($pesanan) < 1)
-                        <tr>
-                            <td scope="row" colspan="6" class="text-center">
-                            Tidak ada pesanan...
-                            </td>
-                        </tr>
-                    @endif
-                    @foreach ($pesanan as $item)
+        <div class="card shadow-none">
+            <div class="card-header">
+                <h3 class="card-title">Daftar Pesanan</h3>
+            </div>
+            <div class="card-body table-responsive p-0">
+                <table class="table table-hover">
+                    <thead>
                         <tr class="text-center">
-                            <td scope="row">{{ $i++ }}</td>
-                            <td>{{ $item->no_meja }}</td>
-                            <td>Rp. {{ $item->total_harga }}</td>
-                            <td>
-                                @if ($item->status <= 1)
-                                    <span class="badge badge-info">
-                                @else
-                                    <span class="badge badge-success">
-                                @endif
-                                {{ $this->status($item->status) }}</span>
-                            </td>
-                            <td>{{ $item->updated_at->diffForHumans() }}</td>
-                            <td>
-                                <a href="#detailModal" class="btn btn-sm btn-secondary" data-toggle="modal" data-pesanan="{{ $item->id }}">
-                                    <i class="fas fa-search"></i>
-                                </a>
-                                <a href="{{ route('pesanan.edit', $item->id) }}" class="btn btn-sm btn-warning">
-                                    <i class="fas fa-edit"></i>
-                                </a>
-                            </td>
+                            <th scope="col">#</th>
+                            <th scope="col">No. Meja</th>
+                            <th scope="col">Total Harga</th>
+                            <th scope="col">Status</th>
+                            <th scope="col">Waktu</th>
+                            <th scope="col">Opsi</th>
                         </tr>
-                    @endforeach
-                </tbody>
-            </table>
-            {{ $pesanan->links() }}
+                    </thead>
+                    <tbody>
+                        @if (count($pesanan) < 1)
+                            <tr>
+                                <td scope="row" colspan="6" class="text-center">
+                                Tidak ada pesanan...
+                                </td>
+                            </tr>
+                        @endif
+                        @foreach ($pesanan as $item)
+                            <tr class="text-center">
+                                <td scope="row">{{ $i++ }}</td>
+                                <td>{{ $item->no_meja }}</td>
+                                <td>Rp. {{ $item->total_harga }}</td>
+                                <td>
+                                    @if ($item->status <= 1)
+                                        <span class="badge badge-info">
+                                    @else
+                                        <span class="badge badge-success">
+                                    @endif
+                                    {{ $this->status($item->status) }}</span>
+                                </td>
+                                <td>{{ $item->updated_at->diffForHumans() }}</td>
+                                <td>
+                                    <a href="#detailModal" class="btn btn-sm btn-secondary" data-toggle="modal" data-pesanan="{{ $item->id }}">
+                                        <i class="fas fa-search"></i>
+                                    </a>
+                                    <a href="{{ route('pesanan.edit', $item->id) }}" class="btn btn-sm btn-warning">
+                                        <i class="fas fa-edit"></i>
+                                    </a>
+                                </td>
+                            </tr>
+                        @endforeach
+                    </tbody>
+                </table>
+            </div>
+            <div class="card-footer">
+                {{ $pesanan->links() }}
+            </div>
         </div>
     </div>
 
