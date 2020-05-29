@@ -26,7 +26,10 @@
         </div>
     </div>
     <div class="col-md-9">
-        <div class="grid" id="grid">
+        <div wire:loading wire:target="handleCategorySelected, menuSearch">
+            <p>loading....</p>
+        </div>
+        <div wire:loading.remove class="grid" id="grid">
             @foreach ($menus as $menu)
                 <div wire:click="$emit('menuSelected', {{ $menu->id }})" class="grid-item">
                     <div class="card {{ in_array($menu->id, $cart) ? 'active' : '' }}">
