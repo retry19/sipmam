@@ -39,6 +39,15 @@
   font-weight: 300;
 }
 
+.grid.loading {
+  opacity: .65;
+}
+.grid.loading .card:hover {
+  cursor: not-allowed;
+  background: none;
+  transform: none;
+}
+
 .list-menu {
   position: sticky;
   padding: 0 10px;
