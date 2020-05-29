@@ -64,9 +64,9 @@
                                 <a href="#detailModal" class="btn btn-sm btn-secondary" data-toggle="modal" data-pesanan="{{ $item->id }}">
                                     <i class="fas fa-search"></i>
                                 </a>
-                                <button class="btn btn-sm btn-warning">
+                                <a href="{{ route('pesanan.edit', $item->id) }}" class="btn btn-sm btn-warning">
                                     <i class="fas fa-edit"></i>
-                                </button>
+                                </a>
                             </td>
                         </tr>
                     @endforeach

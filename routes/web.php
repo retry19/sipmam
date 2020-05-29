@@ -27,6 +27,8 @@ Route::group(['middleware' => 'auth', 'prefix' => 'dashboard'], function () {
     Route::get('/', function() { return view('layouts.app'); })->name('dashboard');
     Route::livewire('/order', 'pelayan.order-index')->name('order.index');
     Route::livewire('/pesanan', 'pelayan.pesanan-index')->name('pesanan.index');
+    Route::livewire('/pesanan/{id}/edit', 'pelayan.pesanan-edit')->name('pesanan.edit');
 
+    // ajax
     Route::get('/ajax/pesanan/{id}/list', 'AjaxController@detailPesanan');
 });
