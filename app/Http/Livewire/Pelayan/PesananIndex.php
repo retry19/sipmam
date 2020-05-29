@@ -3,6 +3,7 @@
 namespace App\Http\Livewire\Pelayan;
 
 use App\Pesanan;
+use Carbon\Carbon;
 use Livewire\Component;
 
 class PesananIndex extends Component
@@ -13,7 +14,7 @@ class PesananIndex extends Component
 
     public function handleStatusSelected($status)
     {
-        // 
+        $this->statusSelected = $status;
     }
 
     public function status($status) {
@@ -38,7 +39,22 @@ class PesananIndex extends Component
 
     public function render()
     {
-        $pesanan = Pesanan::latest()->paginate(10);
+        $pesanan = [];
+
+        switch ($this->statusSelected) {
+            case 'proses':
+                $pesanan = Pesanan::whereDate('created_at', Carbon::today())->whereBetween('status', [0, 2])->latest()->paginate(10);
+                break;
+            case 'selesai':
+                $pesanan = Pesanan::whereDate('created_at', Carbon::today())->where('status', '>', 2)->latest()->paginate(10);
+                break;
+            default:
+                $pesanan = Pesanan::whereDate('created_at', Carbon::today())->latest()->paginate(10);
+        }
+
+        if ($this->mejaSearch != null) {
+            $pesanan = Pesanan::whereDate('created_at', Carbon::today())->where('no_meja', $this->mejaSearch)->latest()->paginate(10);
+        }
         
         return view('livewire.pelayan.pesanan-index', [
             'pesanan' => $pesanan

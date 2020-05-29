@@ -6,7 +6,7 @@
                     <div class="input-group-prepend">
                         <span class="input-group-text search-icon" id="search"><i class="fas fa-search"></i></span>
                     </div>
-                    <input wire:model.debounce.500ms="mejaSearch" type="text" class="form-control search-field" placeholder="Cari meja..." aria-label="Cari meja..." aria-describedby="search">
+                    <input wire:model="mejaSearch" type="text" class="form-control search-field" placeholder="Cari meja..." aria-label="Cari meja..." aria-describedby="search">
                 </div>
             </form>
             <ul>
@@ -27,7 +27,7 @@
     </div>
     <div class="col-md-9">
         <div class="table-responsive">
-            <table class="table table-bordered">
+            <table class="table table-bordered bg-white table-hover">
                 <thead class="thead-light">
                     <tr class="text-center">
                         <th scope="col">#</th>
@@ -39,6 +39,13 @@
                     </tr>
                 </thead>
                 <tbody>
+                    @if (count($pesanan) < 1)
+                        <tr>
+                            <td scope="row" colspan="6" class="text-center">
+                            Tidak ada pesanan...
+                            </td>
+                        </tr>
+                    @endif
                     @foreach ($pesanan as $item)
                         <tr class="text-center">
                             <td scope="row">{{ $i++ }}</td>
