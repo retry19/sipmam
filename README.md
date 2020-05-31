@@ -1,14 +1,14 @@
-# 🍲 SIPMAM
+# SIPMAM
 
 > Sistem Pemesanan Makanan dan Minuman
 
-## ⏳ Tutorial Instal
+## Tutorial Instal
 
-### 🎁 Instal
+### Instal
 
 Pastikan telah instal `php 7.2`, dan [`composer`](https://getcomposer.org/download/)
 
-### 👇 Download / Clone Repo
+### Download / Clone Repo
 
 Silahkan untuk mendownload repo ini, atau clone :
 
@@ -16,7 +16,7 @@ Silahkan untuk mendownload repo ini, atau clone :
 git clone https://github.com/retry19/sipmam.git
 ```
 
-### ✍ Configurasi
+### Configurasi
 
 Buka `cmd` atau `terminal`, lalu masuk ke lokasi folder repo yang telah didownload atau clone
 
@@ -57,7 +57,7 @@ Lakukan migration dan seeder table yang dibutuhkan
 php artisan migrate --seed
 ```
 
-### 🏃 Menjalankan App
+### Menjalankan App
 
 Buka `cmd` atau `terminal`, pastikan lokasinya berada di project sipmam
 
@@ -71,4 +71,4 @@ Pastikan muncul tulisan (port bisa berbeda) :
 Laravel development server started: http://127.0.0.1:8000
 ```
 
-Buka [`http://127.0.0.1:8000`](http://127.0.0.1:8000) pada browser kesayangan 💝
+Buka [`http://127.0.0.1:8000`](http://127.0.0.1:8000) pada browser kesayangan.
