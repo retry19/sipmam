@@ -71,5 +71,5 @@
 @section('title', 'Edit Pesanan')
 @section('pesanan', 'active')
 @section('heading')
-    <a href="{{ route('pesanan.index') }}" class="btn btn-secondary p text-white"><i class="fas fa-angle-left"></i>&nbsp; Kembali</a> &nbsp; Edit Pesanan
+    <a href="{{ route('pelayan.pesanan-all') }}" class="btn btn-secondary p text-white"><i class="fas fa-angle-left"></i>&nbsp; Kembali</a> &nbsp; Edit Pesanan
 @endsection

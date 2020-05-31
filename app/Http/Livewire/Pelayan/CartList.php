@@ -63,7 +63,7 @@ class CartList extends Component
         }
         $this->handleCancelOrder();
 
-        return redirect()->route('order.index');
+        return redirect()->route('pelayan.order');
     }
 
     public function handleCancelOrder()

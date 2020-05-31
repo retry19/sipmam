@@ -87,13 +87,13 @@
             </li>
             <li class="nav-header">PELAYAN</li>
             <li class="nav-item">
-              <a href="{{ route('order.index') }}" class="nav-link @yield('order')">
+              <a href="{{ route('pelayan.order') }}" class="nav-link @yield('order')">
                 <i class="nav-icon fas fa-shopping-bag"></i>
                 <p>Order</p>
               </a>
             </li>
             <li class="nav-item">
-              <a href="{{ route('pesanan.index') }}" class="nav-link @yield('pesanan')">
+              <a href="{{ route('pelayan.pesanan-all') }}" class="nav-link @yield('pesanan')">
                 <i class="nav-icon fas fa-calendar-alt"></i>
                 <p>
                   Pesanan
