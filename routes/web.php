@@ -31,6 +31,9 @@ Route::group(['middleware' => 'auth', 'prefix' => 'dashboard'], function () {
         Route::livewire('/pesanan', 'pelayan.pesanan-index')->name('pelayan.pesanan-all');
         Route::livewire('/pesanan/{id}/edit', 'pelayan.pesanan-edit')->name('pelayan.pesanan-edit');
     });
+    Route::group(['middleware' => 'role:koki'], function () {
+        Route::livewire('/pesanan', 'koki.pesanan-index')->name('koki.pesanan-all');
+    });
 
     // ajax
     Route::get('/ajax/pesanan/{id}/list', 'AjaxController@detailPesanan');

@@ -136,6 +136,12 @@ aside.control-sidebar {
   display: none;
 }
 
+
+/* HALAMAN PESANAN (koki) */
+.list-pesanan .card {
+  border-radius: 10px;
+}
+
 @media (min-width: 575px) {
   .grid-item {
     width: 25%;
@@ -170,5 +176,9 @@ aside.control-sidebar {
   }
   .list-menu ul li:nth-child(1) {
     margin: 0;
+  }
+
+  .list-pesanan .card-columns {
+    column-count: 2;
   }
 }

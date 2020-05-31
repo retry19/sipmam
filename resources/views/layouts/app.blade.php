@@ -48,9 +48,11 @@
             <a href="#" class="dropdown-item dropdown-footer">See All Notifications</a>
           </div>
         </li>
-        <li class="nav-item">
-          <livewire:pelayan.cart-icon />
-        </li>
+        @if(auth()->user()->role == 'pelayan')
+          <li class="nav-item">
+            <livewire:pelayan.cart-icon />
+          </li>
+        @endif
       </ul>
     </nav>
     <!-- /.navbar -->
@@ -85,25 +87,43 @@
                 <p>Dashboard</p>
               </a>
             </li>
-            <li class="nav-header">PELAYAN</li>
-            <li class="nav-item">
-              <a href="{{ route('pelayan.order') }}" class="nav-link @yield('order')">
-                <i class="nav-icon fas fa-shopping-bag"></i>
-                <p>Order</p>
-              </a>
-            </li>
-            <li class="nav-item">
-              <a href="{{ route('pelayan.pesanan-all') }}" class="nav-link @yield('pesanan')">
-                <i class="nav-icon fas fa-calendar-alt"></i>
-                <p>
-                  Pesanan
-                  @php
-                    $jmlPesanan = App\Pesanan::whereDate('created_at', Carbon\Carbon::today())->count();
-                  @endphp
-                  <span class="badge badge-info right">{{ $jmlPesanan }}</span>
-                </p>
-              </a>
-            </li>
+
+            @if(auth()->user()->role == 'pelayan')
+              <li class="nav-header">PELAYAN</li>
+              <li class="nav-item">
+                <a href="{{ route('pelayan.order') }}" class="nav-link @yield('order')">
+                  <i class="nav-icon fas fa-shopping-bag"></i>
+                  <p>Order</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="{{ route('pelayan.pesanan-all') }}" class="nav-link @yield('pesanan')">
+                  <i class="nav-icon fas fa-calendar-alt"></i>
+                  <p>
+                    Pesanan
+                    @php
+                      $jmlPesanan = App\Pesanan::whereDate('created_at', Carbon\Carbon::today())->count();
+                    @endphp
+                    <span class="badge badge-info right">{{ $jmlPesanan }}</span>
+                  </p>
+                </a>
+              </li>
+            @endif
+            @if(auth()->user()->role == 'koki')
+              <li class="nav-header">KOKI</li>
+              <li class="nav-item">
+                <a href="{{ route('koki.pesanan-all') }}" class="nav-link @yield('pesanan')">
+                  <i class="nav-icon fas fa-calendar-alt"></i>
+                  <p>
+                    Pesanan
+                    @php
+                      $jmlPesanan = App\Pesanan::whereDate('created_at', Carbon\Carbon::today())->count();
+                    @endphp
+                    <span class="badge badge-info right">{{ $jmlPesanan }}</span>
+                  </p>
+                </a>
+              </li>
+            @endif
             <li class="nav-header">OPTION</li>
             <li class="nav-item">
               <livewire:auth.logout />
