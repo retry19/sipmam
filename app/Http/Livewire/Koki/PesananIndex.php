@@ -12,22 +12,26 @@ class PesananIndex extends Component
     public $haha = 1;
     public $listProsesPesanan = [];
 
+    protected $listeners = ['handleProsesPesanan'];
+
     public function handleProsesPesanan($id)
     {
-        if (!in_array($id, $this->listProsesPesanan)) {
-            $this->haha += 1;
-            $pesanan = Pesanan::find($id);
-
+        $pesanan = Pesanan::find($id);
+        
+        if ($pesanan->status < 1) {
             $pesanan->status = 1;
             $pesanan->save();
 
-            array_push($this->listProsesPesanan, $id);
+            $this->listProsesPesanan = Pesanan::where('status', '=', 1)->get();
         }
     }
 
     public function mount()
     {
-        $this->listProsesPesanan = Pesanan::where('status', 1)->get(['id']);
+        $_pesanan = Pesanan::where('status', '=', 1)->get();
+        if (count($_pesanan) > 0) {
+            $this->listProsesPesanan = $_pesanan;
+        }
     }
 
     public function render()

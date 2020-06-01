@@ -28,8 +28,8 @@ Route::group(['middleware' => 'auth', 'prefix' => 'dashboard'], function () {
 
     Route::group(['middleware' => 'role:pelayan'], function () {
         Route::livewire('/order', 'pelayan.order-index')->name('pelayan.order');
-        Route::livewire('/pesanan', 'pelayan.pesanan-index')->name('pelayan.pesanan-all');
-        Route::livewire('/pesanan/{id}/edit', 'pelayan.pesanan-edit')->name('pelayan.pesanan-edit');
+        Route::livewire('/order/list', 'pelayan.pesanan-index')->name('pelayan.pesanan-all');
+        Route::livewire('/order/{id}/edit', 'pelayan.pesanan-edit')->name('pelayan.pesanan-edit');
     });
     Route::group(['middleware' => 'role:koki'], function () {
         Route::livewire('/pesanan', 'koki.pesanan-index')->name('koki.pesanan-all');
