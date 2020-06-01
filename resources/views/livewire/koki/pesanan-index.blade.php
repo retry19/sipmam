@@ -8,7 +8,7 @@
                     @foreach ($pesanan as $item)
                         <li 
                             wire:click="handleProsesPesanan({{ $item->id }})" 
-                            class="{{ $item->status == 1 ? 'active' : '' }}"
+                            class="{{ $this->generateClass($item->status) }}"
                         >
                             Meja : {{ $item->no_meja }} 
                             <small class="text-muted">
@@ -27,12 +27,12 @@
                     <div class="card-header">
                         <h3 class="card-title">Meja {{ $p->no_meja }}</h3>
                         <div class="float-right btn-group">
-                            <button type="button" class="btn btn-warning btn-sm">Selesai</button>
+                            <button wire:click="handleProsesSelesai({{ $p->id }})" type="button" class="btn btn-warning btn-sm" {{ $this->checkMenuKosong($p->detailPesanan) ? 'disabled' : '' }}>Selesai</button>
                             <button type="button" class="btn btn-warning btn-sm dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <span class="sr-only">Toggle Dropdown</span>
                             </button>
                             <div class="dropdown-menu">
-                                <a class="dropdown-item" href="#">Terdapat Stok Kosong</a>
+                                <a class="dropdown-item" href="{{ route('koki.pesanan-edit', $p->id) }}">Terdapat Stok Kosong</a>
                             </div>
                         </div>
                     </div>
@@ -41,7 +41,11 @@
                             @foreach ($p->detailPesanan as $detail)
                                 <li class="list-group-item d-flex justify-content-between align-items-center">
                                     {{ $detail->menu->nama_menu }}
-                                    <span class="badge badge-info badge-pill">{{ $detail->jml_pesan }}</span>
+                                    @if ($detail->menu->kosong || $detail->menu->jml_tersedia == $detail->menu->jml_dipesan)
+                                        <span class="badge badge-danger badge-pill">Kosong!</span>
+                                    @else
+                                        <span class="badge badge-info badge-pill">{{ $detail->jml_pesan }}</span>
+                                    @endif
                                 </li>
                             @endforeach
                         </ul>

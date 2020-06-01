@@ -12,6 +12,15 @@ class PesananIndex extends Component
     public $haha = 1;
     public $listProsesPesanan = [];
 
+    public function handleProsesSelesai($id)
+    {
+        Pesanan::find($id)->update([
+            'status' => 2
+        ]);
+
+        $this->refreshListProsesPesanan();
+    }
+
     public function handleProsesPesanan($id)
     {
         $pesanan = Pesanan::find($id);
@@ -19,9 +28,42 @@ class PesananIndex extends Component
         if ($pesanan->status < 1) {
             $pesanan->status = 1;
             $pesanan->save();
-
-            $this->listProsesPesanan = Pesanan::where('status', '=', 1)->get();
+        
+            $this->refreshListProsesPesanan();
         }
+    }
+
+    public function checkMenuKosong($pesanan)
+    {
+        foreach ($pesanan as $p) {
+            if ($p->menu->kosong || $p->menu->jml_tersedia == $p->menu->jml_dipesan) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    public function generateClass($status)
+    {
+        $result = '';
+        
+        switch ($status) {
+            case 0:
+                break;
+            case 1:
+                $result = 'active';
+                break;
+            default:
+                $result = 'done';
+        }
+
+        return $result;
+    }
+
+    private function refreshListProsesPesanan()
+    {
+        $this->listProsesPesanan = Pesanan::where('status', '=', 1)->get();
     }
 
     public function mount()
@@ -34,7 +76,10 @@ class PesananIndex extends Component
 
     public function render()
     {
-        $pesanan = Pesanan::whereDate('created_at', Carbon::today())->latest()->paginate(10);
+        $pesanan = Pesanan::whereDate('created_at', Carbon::today())
+            ->orderBy('id', 'ASC')
+            ->orderBy('status', 'ASC')
+            ->paginate(10);
 
         return view('livewire.koki.pesanan-index', [
             'pesanan' => $pesanan

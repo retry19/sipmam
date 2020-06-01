@@ -138,6 +138,14 @@ aside.control-sidebar {
 
 
 /* HALAMAN PESANAN (koki) */
+.list-menu ul li.done {
+  opacity: .65;
+  cursor: default;
+}
+.list-menu ul li:hover.done {
+  background-color: #fff;
+}
+
 .list-pesanan .card {
   border-radius: 10px;
 }

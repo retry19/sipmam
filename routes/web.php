@@ -33,6 +33,7 @@ Route::group(['middleware' => 'auth', 'prefix' => 'dashboard'], function () {
     });
     Route::group(['middleware' => 'role:koki'], function () {
         Route::livewire('/pesanan', 'koki.pesanan-index')->name('koki.pesanan-all');
+        Route::livewire('/pesanan/{id}/edit', 'koki.pesanan-menu-empty')->name('koki.pesanan-edit');
     });
 
     // ajax
