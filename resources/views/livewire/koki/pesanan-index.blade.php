@@ -7,7 +7,7 @@
                 <ul>
                     @foreach ($pesanan as $item)
                         <li 
-                            wire:click="$emit('handleProsesPesanan', {{ $item->id }})" 
+                            wire:click="handleProsesPesanan({{ $item->id }})" 
                             class="{{ $item->status == 1 ? 'active' : '' }}"
                         >
                             Meja : {{ $item->no_meja }} 

@@ -12,8 +12,6 @@ class PesananIndex extends Component
     public $haha = 1;
     public $listProsesPesanan = [];
 
-    protected $listeners = ['handleProsesPesanan'];
-
     public function handleProsesPesanan($id)
     {
         $pesanan = Pesanan::find($id);
