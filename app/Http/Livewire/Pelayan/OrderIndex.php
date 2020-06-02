@@ -11,12 +11,24 @@ class OrderIndex extends Component
     public $menuSearch = null;
     public $cart = [];
 
+    public $notif = [];
+
     protected $listeners = [
         'menuSelected' => 'handleMenuSelected',
         'removeItemCart' => 'handleRemoveItem',
         'cancelOrder' => 'handleCancelOrder',
-        'submitOrder' => 'handleSubmitOrder'
+        'submitOrder' => 'handleSubmitOrder',
+        'echo:koki,MenuEmpty' => 'notifyMenuEmpty'
     ];
+
+    public function notifyMenuEmpty($value)
+    {
+        array_push($this->notif, [
+            'id' => $value['pesananId'],
+            'menus' => json_decode($value['menuId']),
+            'message' => $value['message'],
+        ]);
+    }
 
     public function handleSubmitOrder($totalHarga)
     {

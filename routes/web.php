@@ -22,6 +22,10 @@ Route::group(['middleware' => 'guest'], function() {
         ->layout('layouts.auth');
 });
 
+Route::get('/notif/{pesananId}/{menuId}', function ($pesananId, $menuId) {
+    event(new App\Events\MenuEmpty($pesananId, $menuId));
+    return "done.";
+});
 
 Route::group(['middleware' => 'auth', 'prefix' => 'dashboard'], function () {
     Route::get('/', function() { return view('layouts.app'); })->name('dashboard');

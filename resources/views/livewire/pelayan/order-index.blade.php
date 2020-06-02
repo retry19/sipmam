@@ -48,3 +48,12 @@
 @section('title', 'Order')
 @section('order', 'active')
 @section('heading', 'Daftar Menu')
+
+{{-- @section('js')
+    <script>
+        Echo.channel('koki')
+            .listen('MenuEmpty', (e) => {
+                console.log("haha");
+            });
+    </script>
+@endsection --}}
