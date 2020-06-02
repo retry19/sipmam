@@ -18,7 +18,8 @@ class NotifSection extends Component
             'pesanan_id' => $value['pesananId'],
             'menu_id' => $value['menuId'],
             'message' => 'Terdapat menu kosong, harap diganti...',
-            'role' => 'pelayan'
+            'role' => 'pelayan',
+            'aksi' => 1
         ]);
     }
 

@@ -10,7 +10,11 @@
             <p class="text-center my-3">Tidak ada notifikasi</p>
         @else
             @foreach ($notifications as $notif)
-                <a href="{{ route('notif.edit', $notif->id) }}" class="dropdown-item {{ !$notif->selesai ? 'notif-not-done' : '' }}">
+                @if($notif->aksi)
+                    <a href="{{ route('notif.edit', $notif->id) }}" class="dropdown-item {{ !$notif->selesai ? 'notif-not-done' : '' }}">
+                @else 
+                    <a href="" class="dropdown-item {{ !$notif->selesai ? 'notif-not-done' : '' }}">
+                @endif
                     <div class="media">
                         <div class="media-body">
                             <h3 class="dropdown-item-title">

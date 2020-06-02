@@ -31,7 +31,7 @@
                                 <td>{{ $notif->message }}</td>
                                 <td>
                                     @if ($notif->selesai == 0)
-                                        <span class="badge badge-danger">Belum selesai
+                                        <span class="badge badge-danger">{{ $notif->aksi ? 'Belum selesai' : 'Belum dibaca' }}
                                     @else
                                         <span class="badge badge-success">Selesai
                                     @endif
@@ -39,8 +39,12 @@
                                 </td>
                                 <td>{{ $notif->created_at->diffForHumans() }}</td>
                                 <td>
-                                    <a href="{{ route('notif.edit', $notif->id) }}" class="btn btn-sm btn-warning {{ $notif->selesai ? 'disabled' : '' }}">
-                                        <i class="fas fa-edit"></i>
+                                    @if($notif->aksi)
+                                        <a href="{{ route('notif.edit', $notif->id) }}" class="btn btn-sm btn-warning {{ $notif->selesai ? 'disabled' : '' }}">
+                                    @else
+                                        <a href="" class="btn btn-sm btn-warning {{ $notif->selesai ? 'disabled' : '' }}">
+                                    @endif
+                                        <i class="fas {{ $notif->aksi ? 'fa-edit' : 'fa-check' }}"></i>
                                     </a>
                                 </td>
                             </tr>
