@@ -8,49 +8,54 @@
 }
 
 /* HALAMAN ORDER (pelayan) */
-.grid-item {
-  padding-bottom: 10px;
-  padding-right: 10px;
-  padding-left: 10px;
-  width: 50%;
+.list-order .card-columns {
+  margin: 0 10px;
+  column-count: 2;
 }
-.grid-item .card {
+.list-order .card {
+  display: inline-block;
+  width: 100%;
   box-shadow: none;
   border-radius: 10px;
   transition: all .3s;
   transform: scale(1);
 }
-.grid-item .card:hover {
+.list-order .card:hover {
+  position: relative;
   cursor: pointer;
   background-color: khaki;
   transform: scale(1.1);
 }
-.grid-item .card.active {
+.list-order .card.active {
   background-color: khaki;
 }
-.grid-item .card:hover.active {
+.list-order .card:hover.active {
   background-color: khaki;
   transform: none;
 }
-.grid-item .card .card-img-top {
+.list-order .card .card-img-top {
   border-radius: 10px;
 }
-.grid-item .card .card-body footer {
+.list-order .card .card-body footer {
   font-weight: 300;
 }
 
-.grid.loading {
+.list-order .card-columns.loading {
   opacity: .65;
 }
-.grid.loading .card:hover {
+.list-order .card-columns.loading .card:hover {
   cursor: not-allowed;
   background: none;
   transform: none;
+}
+.list-order .card-columns .card {
+  margin-bottom: 1rem;
 }
 
 .list-menu {
   position: sticky;
   padding: 0 10px;
+  margin-top: .9rem;
   margin-bottom: 20px;
 }
 .list-menu .search-icon {
@@ -151,17 +156,16 @@ aside.control-sidebar {
 }
 
 @media (min-width: 575px) {
-  .grid-item {
-    width: 25%;
+  .list-order .card {
+    margin-top: .9rem;
   }
-
-  .grid-item .card .card-body {
+  .list-order .card .card-body {
     padding: 10px;
   }
 }
 
 @media (min-width: 768px) {
-  .grid-item .card .card-body {
+  .list-order .card .card-body {
     padding: 20px;
   }
 
@@ -184,6 +188,10 @@ aside.control-sidebar {
   }
   .list-menu ul li:nth-child(1) {
     margin: 0;
+  }
+
+  .list-order .card-columns {
+    column-count: 4;
   }
 
   .list-pesanan .card-columns {

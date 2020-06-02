@@ -189,14 +189,11 @@
   <script src="{{ asset('js/bootstrap.bundle.min.js') }}"></script>
   <script src="{{ asset('vendor/overlayScrollbars/js/jquery.overlayScrollbars.min.js') }}"></script>
 
-  <!-- Masonry -->
-  <script src="{{ asset('js/masonry.min.js') }}"></script>
-
   <!-- AdminLTE -->
   <script src="{{ asset('js/adminlte.js') }}"></script>
 
   <!-- OPTIONAL SCRIPTS -->
-  <script src="{{ asset('js/Chart.min.js') }}"></script>
+  {{-- <script src="{{ asset('js/Chart.min.js') }}"></script> --}}
   {{-- <script src="{{ asset('js/demo.js') }}"></script> --}}
   <script src="{{ asset('js/dashboard3.js') }}"></script>
   @yield('js')
