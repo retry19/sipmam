@@ -25,7 +25,9 @@ class NotifSection extends Component
     public function render()
     {
         $this->notifications = Notification::whereDate('created_at', Carbon::today())
-                                        ->where('role', 'pelayan')->get();
+                                    ->where('role', 'pelayan')
+                                    ->orderBy('id', 'desc')
+                                    ->get();
 
         return view('livewire.pelayan.notif-section');
     }

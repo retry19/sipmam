@@ -10,7 +10,7 @@
             <p class="text-center my-3">Tidak ada notifikasi</p>
         @else
             @foreach ($notifications as $notif)
-                <a href="" class="dropdown-item {{ !$notif->selesai ? 'notif-not-done' : '' }}">
+                <a href="{{ route('notif.edit', $notif->id) }}" class="dropdown-item {{ !$notif->selesai ? 'notif-not-done' : '' }}">
                     <div class="media">
                         <div class="media-body">
                             <h3 class="dropdown-item-title">
@@ -24,6 +24,6 @@
             @endforeach
         @endif
         <div class="dropdown-divider"></div>
-        <a href="#" class="dropdown-item dropdown-footer">See All Notifications</a>
+        <a href="{{ route('notif.all') }}" class="dropdown-item dropdown-footer">See All Notifications</a>
     </div>
 </li>

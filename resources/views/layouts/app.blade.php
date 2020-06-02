@@ -113,7 +113,13 @@
             <li class="nav-item">
               <a href="{{ route('notif.all') }}" class="nav-link @yield('notif')">
                 <i class="nav-icon fas fa-bell"></i>
-                <p>Order</p>
+                <p>
+                  Notifikasi
+                  @php
+                    $jmlNotif = App\Notification::whereDate('created_at', Carbon\Carbon::today())->where('role', auth()->user()->role)->count();
+                  @endphp
+                  <span class="badge badge-info right">{{ $jmlNotif }}</span>
+                </p>
               </a>
             </li>
             <li class="nav-item">
