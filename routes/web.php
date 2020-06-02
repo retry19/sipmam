@@ -40,6 +40,8 @@ Route::group(['middleware' => 'auth', 'prefix' => 'dashboard'], function () {
         Route::livewire('/pesanan/{id}/edit', 'koki.pesanan-menu-empty')->name('koki.pesanan-edit');
     });
 
+    Route::livewire('/notification', 'notification-list')->name('notif.all');
+
     // ajax
     Route::get('/ajax/pesanan/{id}/list', 'AjaxController@detailPesanan');
 });

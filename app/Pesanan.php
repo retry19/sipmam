@@ -13,4 +13,9 @@ class Pesanan extends Model
     {
         return $this->hasMany('App\DetailPesanan', 'pesanan_id');
     }
+
+    public function notification()
+    {
+        return $this->hasMany('App\Notification', 'pesanan_id');
+    }
 }

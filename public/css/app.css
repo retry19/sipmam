@@ -140,6 +140,9 @@ aside.control-sidebar {
 .btn-disabled {
   display: none;
 }
+.notif-not-done {
+  background-color: #a7ffb6;
+}
 
 
 /* HALAMAN PESANAN (koki) */
