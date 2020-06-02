@@ -63,6 +63,7 @@ class CartList extends Component
         }
         $this->handleCancelOrder();
 
+        session()->flash('success', '<strong>Selamat!</strong> Pemesanan makanan telah berhasil dilakukan.');
         return redirect()->route('pelayan.order');
     }
 

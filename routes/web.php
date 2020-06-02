@@ -41,8 +41,5 @@ Route::group(['middleware' => 'auth', 'prefix' => 'dashboard'], function () {
     });
 
     Route::livewire('/notification', 'notification-list')->name('notif.all');
-    Route::livewire('/notification/{id}/edit', 'notification-edit')->name('notif.edit');
-
-    // ajax
-    Route::get('/ajax/pesanan/{id}/list', 'AjaxController@detailPesanan');
+    // Route::livewire('/notification/{id}/done', 'notification-done')->name('notif.edit');
 });

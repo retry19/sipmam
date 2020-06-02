@@ -24,7 +24,7 @@
                         <td>{{ $menu['nama_menu'] }}</td>
                         <td>Rp. {{ $menu['harga'] }}</td>
                         <td class="text-center">
-                            @if ($menu['jml_tersedia'] > $menu['jml_dipesan'])
+                            @if (!$menu['kosong'] && $menu['jml_tersedia'] > $menu['jml_dipesan'])
                                 <button type="button" wire:click="$emit('addPesanan', {{ $menu['id'] }})" class="btn btn-sm btn-primary"><i class="fas fa-plus"></i></a>
                             @else
                                 <p class="text-danger">Kosong</p>

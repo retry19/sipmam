@@ -2,26 +2,22 @@
 
 namespace App\Http\Controllers;
 
-use App\DetailPesanan;
-use App\Menu;
-use Illuminate\Http\Request;
+use App\Pesanan;
 
 class AjaxController extends Controller
 {
-    public function detailPesanan($id, Request $request)
+    public function detailPesanan($id)
     {
-        $listPesanan = DetailPesanan::where('pesanan_id', $id)->get();
+        $listPesanan = Pesanan::find($id);
 
         $list = [];
 
-        foreach ($listPesanan as $pesanan) {
-            $menu = Menu::find($pesanan->menu_id, ['nama_menu', 'harga']);
-            
+        foreach ($listPesanan->detailPesanan as $pesanan) {
             $arrPesanan = [
                 'id' => $pesanan->id,
                 'pesanan_id' => $pesanan->pesanan_id,
-                'nama_menu' => $menu->nama_menu,
-                'harga' => $menu->harga,
+                'nama_menu' => $pesanan->menu->nama_menu,
+                'harga' => $pesanan->menu->harga,
                 'jml_pesan' => $pesanan->jml_pesan,
             ];
 

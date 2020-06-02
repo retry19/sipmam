@@ -33,6 +33,14 @@
   background-color: khaki;
   transform: none;
 }
+.list-order .card.disabled {
+  opacity: .3;
+}
+.list-order .card:hover.disabled {
+  cursor: default;
+  background: none;
+  transform: none;
+}
 .list-order .card .card-img-top {
   border-radius: 10px;
 }
@@ -142,6 +150,10 @@ aside.control-sidebar {
 }
 .notif-not-done {
   background-color: #a7ffb6;
+}
+
+.alert {
+  opacity: .8;
 }
 
 

@@ -13,12 +13,24 @@ class NotificationList extends Component
     public $countNotif;
     public $no = 1;
 
+    public function handleReadNotif($notifId)
+    {
+        Notification::find($notifId)->update([
+            'selesai' => 1
+        ]);
+
+        $this->emit('readNotif');
+    }
+
     public function render()
     {
         $notifications = Notification::where('role', auth()->user()->role)
+                            ->orderBy('selesai', 'asc')
                             ->orderBy('id', 'desc')
                             ->paginate(10);
-        $countNotif = Notification::where('role', auth()->user()->role)->count();
+
+        $countNotif = Notification::where('role', auth()->user()->role)
+                        ->count();
         
         $this->countNotif = $countNotif;
 

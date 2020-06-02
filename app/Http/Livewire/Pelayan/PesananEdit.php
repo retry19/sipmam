@@ -113,7 +113,7 @@ class PesananEdit extends Component
         if (count($this->listPesanan) < 1) {
             Pesanan::destroy($this->getId);
 
-            return redirect()->route('pesanan.index');
+            return redirect()->route('pelayan.pesanan-all');
         }
     }
 

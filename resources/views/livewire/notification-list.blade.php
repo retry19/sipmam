@@ -40,9 +40,9 @@
                                 <td>{{ $notif->created_at->diffForHumans() }}</td>
                                 <td>
                                     @if($notif->aksi)
-                                        <a href="{{ route('notif.edit', $notif->id) }}" class="btn btn-sm btn-warning {{ $notif->selesai ? 'disabled' : '' }}">
+                                        <a href="{{ route('pelayan.pesanan-edit', $notif->pesanan_id) }}" class="btn btn-sm btn-warning {{ $notif->selesai ? 'disabled' : '' }}">
                                     @else
-                                        <a href="" class="btn btn-sm btn-warning {{ $notif->selesai ? 'disabled' : '' }}">
+                                        <a wire:click="handleReadNotif({{ $notif->id }})" class="btn btn-sm btn-warning {{ $notif->selesai ? 'disabled' : '' }}">
                                     @endif
                                         <i class="fas {{ $notif->aksi ? 'fa-edit' : 'fa-check' }}"></i>
                                     </a>

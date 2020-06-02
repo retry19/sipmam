@@ -25,7 +25,7 @@
             </ul>
         </div>
     </div>
-    <div class="col-md-9">
+    <div class="col-md-9 mt-3">
         <div class="card shadow-none">
             <div class="card-header">
                 <h3 class="card-title">Daftar Pesanan</h3>
@@ -123,7 +123,7 @@
 
             $.ajax({
                 method: 'GET',
-                url: `ajax/pesanan/${pesananId}/list`,
+                url: `http://localhost:8000/api/pesanan/${pesananId}/list`,
                 success: function(res) {
                     let body = document.getElementById('table-body');
                     

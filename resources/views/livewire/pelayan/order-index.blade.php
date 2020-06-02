@@ -1,4 +1,14 @@
 <div class="row">
+    @if(session()->has('success'))
+        <div class="col-md-12">
+            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                {!! session('success') !!}
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+        </div>
+    @endif
     <div class="col-md-3">
         <div class="list-menu">
             <form>
@@ -28,10 +38,12 @@
     <div class="col-md-9 list-order">
         <div wire:loading.class="loading" class="card-columns">
             @foreach ($menus as $menu)
-                <div 
-                    wire:click="$emit('menuSelected', {{ $menu->id }})" 
-                    class="card {{ in_array($menu->id, $cart) ? 'active' : '' }}"
-                >
+                @if ($menu->kosong || $menu->jml_tersedia <= $menu->jml_dipesan)
+                    <div class="card disabled">
+                @else
+                    <div wire:click="$emit('menuSelected', {{ $menu->id }})" 
+                        class="card {{ in_array($menu->id, $cart) ? 'active' : '' }}">
+                @endif
                     <img src="{{ asset('img/foods/'.$menu->foto_menu) }}" class="card-img-top" alt="{{ $menu->nama_menu }}">
                     <div class="card-body">
                         <h5 class="card-title">{{ $menu->nama_menu }}</h5>
