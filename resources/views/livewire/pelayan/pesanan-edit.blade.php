@@ -1,5 +1,13 @@
 <div class="row">
     <div class="col-md-7">
+        @if(session()->has('success'))
+            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                {!! session('success') !!}
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+        @endif
         <div class="card shadow-none">
             <div class="card-header">
                 <h3 class="card-title">Daftar Pesanan</h3>
@@ -23,7 +31,7 @@
                                 <tr>
                                     <td scope="row" class="text-center">{{ $no++ }}</td>
                                     <td>{{ $item['nama_menu'] }}</td>
-                                    <td>Rp. {{ $item['harga'] }}</td>
+                                    <td class="text-center">{!! !$item['kosong'] ? 'Rp. '.$item['harga'] : '<strong class="text-danger">Kosong</strong>' !!}</td>
                                     <td class="text-center">
                                         <button type="button" data-target="#modalDeletePesanan{{ $no }}" class="btn btn-sm btn-danger" data-toggle="modal"><i class="fas fa-times"></i></a>
                                     </td>

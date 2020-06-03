@@ -67,6 +67,8 @@ class PesananEdit extends Component
                 $pesanan->save();
             }
         }
+
+        session()->flash('success', '<strong>Selamat!</strong> Pesanan berhasil ditambahkan.');
     }
 
     public function togglePesananAdd()
@@ -113,8 +115,11 @@ class PesananEdit extends Component
         if (count($this->listPesanan) < 1) {
             Pesanan::destroy($this->getId);
 
+            session()->flash('success', '<strong>Selamat!</strong> Pesanan berhasil dihapus.');
             return redirect()->route('pelayan.pesanan-all');
         }
+
+        session()->flash('success', '<strong>Selamat!</strong> Pesanan berhasil dihapus.');
     }
 
     private function getDetailPesanan($id) {
@@ -123,8 +128,13 @@ class PesananEdit extends Component
         $list = [];
 
         foreach ($listPesanan as $pesanan) {
-            $menu = Menu::find($pesanan->menu_id, ['id', 'nama_menu', 'harga']);
+            $menu = Menu::find($pesanan->menu_id, ['id', 'nama_menu', 'harga', 'kosong', 'jml_tersedia', 'jml_dipesan']);
             
+            $menuKosong = false;
+            if ($menu->kosong || $menu->jml_tersedia <= $menu->jml_dipesan) {
+                $menuKosong = true;
+            }
+
             $arrPesanan = [
                 'id' => $pesanan->id,
                 'pesanan_id' => $pesanan->pesanan_id,
@@ -132,6 +142,7 @@ class PesananEdit extends Component
                 'nama_menu' => $menu->nama_menu,
                 'harga' => $menu->harga,
                 'jml_pesan' => $pesanan->jml_pesan,
+                'kosong' => $menuKosong 
             ];
 
             array_push($list, $arrPesanan);
