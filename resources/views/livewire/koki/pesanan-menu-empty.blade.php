@@ -25,7 +25,7 @@
                                 <td class="text-center">{{ $p->menu->jml_tersedia - $p->menu->jml_dipesan }}</td>
                                 <td class="text-center">
                                     <div class="form-check">
-                                        <input wire:model="kosong.{{ $p->menu_id }}" type="checkbox" class="form-check-input" value="{{ $p->id }}" {{ $p->menu->kosong == 1 ? 'checked' : '' }}>
+                                        <input wire:model="kosong.{{ $p->menu_id }}" type="checkbox" class="form-check-input" value="{{ $p->menu_id }}" {{ $p->menu->kosong == 1 ? 'checked' : '' }}>
                                     </div>
                                 </td>
                             </tr>

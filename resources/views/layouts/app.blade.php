@@ -32,8 +32,9 @@
 
       <!-- Right navbar links -->
       <ul class="navbar-nav ml-auto">
+        <livewire:notification-icon :role="auth()->user()->role" />
+        
         @if(auth()->user()->role == 'pelayan')
-          <livewire:pelayan.notif-section />
           <li class="nav-item">
             <livewire:pelayan.cart-icon />
           </li>

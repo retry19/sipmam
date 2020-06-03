@@ -2,6 +2,7 @@
 
 namespace App\Http\Livewire\Koki;
 
+use App\Events\MenuEmpty;
 use App\Menu;
 use App\Pesanan;
 use Livewire\Component;
@@ -16,11 +17,12 @@ class PesananMenuEmpty extends Component
     {
         $menuIdKosong = array_keys(array_filter($this->kosong));
         
-        foreach ($menuIdKosong as $menuId) {
-            Menu::find($menuId)->update([
-                'kosong' => 1
-            ]);
-        }
+        Menu::whereIn('id', $menuIdKosong)->update([
+            'kosong' => 1
+        ]);
+
+        event(new MenuEmpty($this->pesananId, $menuIdKosong));
+        session()->flash('success', '<strong>Berhasil!</strong> status menu berhasil diubah, menjadi kosong.');
 
         return redirect()->route('koki.pesanan-all');
     }

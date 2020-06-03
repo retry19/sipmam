@@ -13,6 +13,17 @@ class NotificationList extends Component
     public $countNotif;
     public $no = 1;
 
+    public function handleAksiNotif($notifId, $pesananId)
+    {
+        Notification::find($notifId)->update([
+            'selesai' => 1
+        ]);
+
+        $this->emit('readNotif');
+        
+        return redirect()->route('pelayan.pesanan-edit', $pesananId);
+    }
+
     public function handleReadNotif($notifId)
     {
         Notification::find($notifId)->update([

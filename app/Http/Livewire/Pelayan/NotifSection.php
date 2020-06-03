@@ -28,7 +28,7 @@ class NotifSection extends Component
     {
         Notification::create([
             'pesanan_id' => $value['pesananId'],
-            'menu_id' => $value['menuId'],
+            'menu_id' => json_encode($value['menuId']),
             'message' => 'Terdapat menu kosong, harap diganti...',
             'role' => 'pelayan',
             'aksi' => 1

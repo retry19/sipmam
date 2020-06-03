@@ -61,17 +61,29 @@
                             </tr>
                         @endif
                         @foreach ($pesanan as $item)
+                            @php
+                                $kosong = false;
+
+                                foreach ($item->detailPesanan as $detail) :
+                                    if ($detail->menu->kosong || $detail->menu->jml_tersedia <= $detail->menu->jml_dipesan) :
+                                        $kosong = true;
+                                    endif;
+                                endforeach;
+                            @endphp
                             <tr class="text-center">
                                 <td scope="row">{{ $i++ }}</td>
                                 <td>{{ $item->no_meja }}</td>
                                 <td>Rp. {{ $item->total_harga }}</td>
                                 <td>
-                                    @if ($item->status <= 1)
-                                        <span class="badge badge-info">
+                                    @if ($kosong)
+                                        <span class="badge badge-danger">Terdapat Stok Kosong</span>
                                     @else
-                                        <span class="badge badge-success">
+                                        @if ($item->status <= 1)
+                                            <span class="badge badge-info">{{ $this->status($item->status) }}</span>
+                                        @else
+                                            <span class="badge badge-success">{{ $this->status($item->status) }}</span>
+                                        @endif
                                     @endif
-                                    {{ $this->status($item->status) }}</span>
                                 </td>
                                 <td>{{ $item->updated_at->diffForHumans() }}</td>
                                 <td>

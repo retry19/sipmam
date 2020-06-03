@@ -13,6 +13,7 @@ class OrderedPesanan implements ShouldBroadcast
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
     public $pesananId;
+    public $menuId;
 
     /**
      * Create a new event instance.
