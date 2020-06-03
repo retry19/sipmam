@@ -4,6 +4,7 @@ namespace App\Http\Livewire\Pelayan;
 
 use App\Menu;
 use App\DetailPesanan;
+use App\Events\OrderedPesanan;
 use App\Pesanan;
 use Carbon\Carbon;
 use Livewire\Component;
@@ -62,6 +63,8 @@ class CartList extends Component
             }
         }
         $this->handleCancelOrder();
+
+        event(new OrderedPesanan($pesanan->id));
 
         session()->flash('success', '<strong>Selamat!</strong> Pemesanan makanan telah berhasil dilakukan.');
         return redirect()->route('pelayan.order');

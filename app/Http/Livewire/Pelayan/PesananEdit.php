@@ -3,6 +3,8 @@
 namespace App\Http\Livewire\Pelayan;
 
 use App\DetailPesanan;
+use App\Events\AddedPesanan;
+use App\Events\DeletedPesanan;
 use App\Menu;
 use App\Pesanan;
 use Livewire\Component;
@@ -68,6 +70,7 @@ class PesananEdit extends Component
             }
         }
 
+        event(new AddedPesanan($this->getId, $id));
         session()->flash('success', '<strong>Selamat!</strong> Pesanan berhasil ditambahkan.');
     }
 
@@ -119,6 +122,7 @@ class PesananEdit extends Component
             return redirect()->route('pelayan.pesanan-all');
         }
 
+        event(new DeletedPesanan($this->getId, $id));
         session()->flash('success', '<strong>Selamat!</strong> Pesanan berhasil dihapus.');
     }
 
