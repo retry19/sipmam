@@ -5,7 +5,6 @@ namespace App\Http\Livewire\Pelayan;
 use App\DetailPesanan;
 use App\Events\AddedPesanan;
 use App\Events\DeletedPesanan;
-use App\Menu;
 use App\Pesanan;
 use Livewire\Component;
 
@@ -14,6 +13,7 @@ class PesananEdit extends Component
     public $no = 1;
     public $getId;
     public $listPesanan;
+    public $pesananCount;
     public $pesananId;
     public $totalHarga = 0;
     public $showPesananAdd = false;
@@ -23,100 +23,28 @@ class PesananEdit extends Component
         'addPesanan' => 'handleAddPesanan'
     ];
 
-    public function handleAddPesanan($id)
-    {
-        $menu = Menu::find($id, ['jml_tersedia', 'jml_dipesan', 'harga']);
-    
-        if ($menu->jml_tersedia > $menu->jml_dipesan) {
-            
-            $lastIdPesananStatus = false;
-
-            foreach ($this->listPesanan as $key => $item) {
-                if ($item['menu_id'] == $id) {
-                    $this->listPesanan[$key]['jml_pesan'] += 1;    
-
-                    DetailPesanan::where('id', $item['id'])->update([
-                        'jml_pesan' => $this->listPesanan[$key]['jml_pesan']
-                    ]);
-
-                    Menu::find($item['menu_id'])->update([
-                        'jml_dipesan' => $menu->jml_dipesan + 1
-                    ]);
-
-                    $pesanan = Pesanan::find($this->listPesanan[0]['pesanan_id']);
-
-                    $pesanan->total_harga += $menu->harga;
-                    $pesanan->save();
-
-                    $lastIdPesananStatus = true;
-                }
-            }
-
-            if (!$lastIdPesananStatus) {
-                DetailPesanan::create([
-                    'pesanan_id' => $this->listPesanan[0]['pesanan_id'],
-                    'menu_id' => $id,
-                    'jml_pesan' => 1
-                ]);
-
-                Menu::find($id)->update([
-                    'jml_dipesan' => $menu->jml_dipesan + 1
-                ]);
-
-                $pesanan = Pesanan::find($this->listPesanan[0]['pesanan_id']);
-
-                $pesanan->total_harga += $menu->harga;
-                $pesanan->save();
-            }
-        }
-
-        event(new AddedPesanan($this->getId, $id));
-        session()->flash('success', '<strong>Selamat!</strong> Pesanan berhasil ditambahkan.');
-    }
-
-    public function togglePesananAdd()
-    {
-        $this->showPesananAdd = !$this->showPesananAdd;
-    }
-
     public function deletePesanan($id)
     {
-        foreach ($this->listPesanan as $key => $item) {
-            if($item['id'] == $id) {
-                $menu = Menu::find($item['menu_id'], ['jml_dipesan']);
-                $pesanan = Pesanan::find($this->getId);
-
-                if ($item['jml_pesan'] > 1) {
-                    $this->listPesanan[$key]['jml_pesan'] -= 1;
-                    
-                    DetailPesanan::where('id', $id)->update([
-                        'jml_pesan' => $this->listPesanan[$key]['jml_pesan']
-                    ]);
-
-                    Menu::find($item['menu_id'])->update([
-                        'jml_dipesan' => $menu->jml_dipesan - 1
-                    ]);
-
-                    $pesanan->total_harga -= $item['harga'];
-                    $pesanan->save();
-                } else {
-                    unset($this->listPesanan[$key]);
-
-                    DetailPesanan::destroy($id);
-
-                    Menu::find($item['menu_id'])->update([
-                        'jml_dipesan' => $menu->jml_dipesan - 1
-                    ]);
-
-                    $pesanan->total_harga -= $item['harga'];
-                    $pesanan->save();
-                }
-
-            }
+        $detailPesanan = DetailPesanan::find($id);
+        
+        if ($detailPesanan->jml_pesan > 1) {
+            $detailPesanan->jml_pesan -= 1;
+            $detailPesanan->save();
+        } else {
+            $detailPesanan->delete();
         }
 
-        if (count($this->listPesanan) < 1) {
-            Pesanan::destroy($this->getId);
+        $detailPesanan->menu->jml_dipesan -= 1;
+        $detailPesanan->menu->save();
+
+        $this->listPesanan->total_harga -= $detailPesanan->menu->harga;
+        $this->listPesanan->save();
+
+        $this->pesananCount = DetailPesanan::where('pesanan_id', $this->getId)->count();
+
+        if ($this->pesananCount < 1) {
+            Pesanan::find($this->getId)
+                ->delete();
 
             session()->flash('success', '<strong>Selamat!</strong> Pesanan berhasil dihapus.');
             return redirect()->route('pelayan.pesanan-all');
@@ -124,45 +52,65 @@ class PesananEdit extends Component
 
         event(new DeletedPesanan($this->getId, $id));
         session()->flash('success', '<strong>Selamat!</strong> Pesanan berhasil dihapus.');
+       
+        return redirect()->route('pelayan.pesanan-edit', $this->getId);
     }
 
-    private function getDetailPesanan($id) {
-        $listPesanan = DetailPesanan::where('pesanan_id', $id)->get();
+    public function handleAddPesanan($id)
+    {
+        $isMenuOnPesanan = DetailPesanan::where('pesanan_id', $this->getId)
+                                ->where('menu_id', $id)
+                                ->count();
 
-        $list = [];
+        if (!$isMenuOnPesanan) {
+            $newDetailPesanan = new DetailPesanan();
 
-        foreach ($listPesanan as $pesanan) {
-            $menu = Menu::find($pesanan->menu_id, ['id', 'nama_menu', 'harga', 'kosong', 'jml_tersedia', 'jml_dipesan']);
+            $newDetailPesanan->pesanan_id = $this->getId;
+            $newDetailPesanan->menu_id = $id;
+            $newDetailPesanan->jml_pesan = 1;
+
+            $newDetailPesanan->save();
+
+            $newDetailPesanan->menu->jml_dipesan += 1;
+            $newDetailPesanan->menu->save();
+
+            $this->listPesanan->total_harga += $newDetailPesanan->menu->harga;
+            $this->listPesanan->save();
+        } else {
+            $detailPesanan = DetailPesanan::where('pesanan_id', $this->getId)
+                                ->where('menu_id', $id)
+                                ->first();
+                                
+            $detailPesanan->jml_pesan += 1;
+            $detailPesanan->save();
+
+            $detailPesanan->menu->jml_dipesan += 1;
+            $detailPesanan->menu->save();
             
-            $menuKosong = false;
-            if ($menu->kosong || $menu->jml_tersedia <= $menu->jml_dipesan) {
-                $menuKosong = true;
-            }
-
-            $arrPesanan = [
-                'id' => $pesanan->id,
-                'pesanan_id' => $pesanan->pesanan_id,
-                'menu_id' => $menu->id,
-                'nama_menu' => $menu->nama_menu,
-                'harga' => $menu->harga,
-                'jml_pesan' => $pesanan->jml_pesan,
-                'kosong' => $menuKosong 
-            ];
-
-            array_push($list, $arrPesanan);
+            $this->listPesanan->total_harga += $detailPesanan->menu->harga;
+            $this->listPesanan->save();
         }
 
-        return $list;
+        event(new AddedPesanan($this->getId, $id));
+        session()->flash('success', '<strong>Selamat!</strong> Pesanan berhasil ditambahkan.');
+
+        return redirect()->route('pelayan.pesanan-edit', $this->getId);
+    }
+
+    public function togglePesananAdd()
+    {
+        $this->showPesananAdd = !$this->showPesananAdd;
     }
 
     public function mount($id)
     {
         $this->getId = $id;
+        $this->pesananCount = DetailPesanan::where('pesanan_id', $id)->count();
     }
 
     public function render()
     {   
-        $this->listPesanan = $this->getDetailPesanan($this->getId);
+        $this->listPesanan = Pesanan::find($this->getId);
 
         return view('livewire.pelayan.pesanan-edit');
     }

@@ -26,6 +26,46 @@
                         </tr>
                     </thead>
                     <tbody>
+                        @if ($pesananCount != 0)
+                            @foreach ($listPesanan->detailPesanan as $detailPesanan)
+                                @for ($i = 0; $i < $detailPesanan->jml_pesan; $i++)
+                                    <tr>
+                                        <td scope="row" class="text-center">{{ $no++ }}</td>
+                                        <td>{{ $detailPesanan->menu->nama_menu }}</td>
+                                        <td class="text-center">{!! !$detailPesanan->menu->kosong ? 'Rp. '.$detailPesanan->menu->harga : '<strong class="text-danger">Kosong</strong>' !!}</td>
+                                        <td class="text-center">
+                                            <button type="button" data-target="#modalDeletePesanan{{ $no }}" class="btn btn-sm btn-danger" data-toggle="modal"><i class="fas fa-times"></i></a>
+                                        </td>
+                                    </tr>
+                                    @php $totalHarga += $detailPesanan->menu->harga @endphp
+
+                                    <!-- Modal -->
+                                    <div class="modal fade" id="modalDeletePesanan{{ $no }}" tabindex="-1" role="dialog" aria-labelledby="modalDeletePesananLabel{{ $no }}" aria-hidden="true">
+                                        <div class="modal-dialog">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title" id="modalDeletePesananLabel{{ $no }}">Detail Pesanan</h5>
+                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                        <span aria-hidden="true">&times;</span>
+                                                    </button>
+                                                </div>
+                                                <form>
+                                                    <div class="modal-body">
+                                                        <p>Apakah anda yakin akan menghapus 1 pesanan :</p>
+                                                        <p id="namaMenu" class="h5">{{ $detailPesanan->menu->nama_menu }}</p>
+                                                    </div>
+                                                    <div class="modal-footer" id="modal-footer">
+                                                        <button wire:click.prevent="deletePesanan({{ $detailPesanan->id }})" class="btn btn-danger" data-dismiss="modal" aria-label="Close">Ya, Hapus</button>
+                                                    </div>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
+                                @endfor
+                            @endforeach
+                        @endif
+                    </tbody>
+                    {{-- <tbody>
                         @foreach ($listPesanan as $item)
                             @for ($i = 0; $i < $item['jml_pesan']; $i++)
                                 <tr>
@@ -62,7 +102,7 @@
                                 </div>
                             @endfor
                         @endforeach
-                    </tbody>
+                    </tbody> --}}
                 </table>
             </div>
             <div class="card-footer text-right">
