@@ -5,6 +5,7 @@ namespace App\Http\Livewire\Pelayan;
 use App\DetailPesanan;
 use App\Events\AddedPesanan;
 use App\Events\DeletedPesanan;
+use App\Notification;
 use App\Pesanan;
 use Livewire\Component;
 
@@ -22,6 +23,17 @@ class PesananEdit extends Component
         'closePesananAdd' => 'togglePesananAdd',
         'addPesanan' => 'handleAddPesanan'
     ];
+
+    private function storeNotification($type, $pesananId, $menuId)
+    {
+        Notification::create([
+            'pesanan_id' => $pesananId,
+            'menu_id' => json_encode($menuId),
+            'message' => $type == 'add' ? 'Pesanan telah diubah dan ditambahkan...' : 'Pesanan telah diubah dan dihapus...',
+            'role' => 'koki',
+            'aksi' => 0
+        ]);
+    }
 
     public function deletePesanan($id)
     {
@@ -51,6 +63,9 @@ class PesananEdit extends Component
         }
 
         event(new DeletedPesanan($this->getId, $id));
+
+        $this->storeNotification('delete', $this->getId, $id);
+
         session()->flash('success', '<strong>Selamat!</strong> Pesanan berhasil dihapus.');
        
         return redirect()->route('pelayan.pesanan-edit', $this->getId);
@@ -92,6 +107,9 @@ class PesananEdit extends Component
         }
 
         event(new AddedPesanan($this->getId, $id));
+
+        $this->storeNotification('add', $this->getId, $id);
+
         session()->flash('success', '<strong>Selamat!</strong> Pesanan berhasil ditambahkan.');
 
         return redirect()->route('pelayan.pesanan-edit', $this->getId);

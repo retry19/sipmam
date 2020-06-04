@@ -12,6 +12,24 @@ class PesananIndex extends Component
     public $haha = 1;
     public $listProsesPesanan = [];
 
+    protected $listeners = [
+        'echo:pelayan,OrderedPesanan' => 'notifyPesanan',
+        'echo:pelayan,AddedPesanan' => 'notifyEditPesanan',
+        'echo:pelayan,DeletedPesanan' => 'notifyEditPesanan'
+    ];
+
+    public function notifyPesanan($value)
+    {
+        session()->flash('info', '<strong>Pesanan Baru!</strong> telah ditambahkan.');
+        return 0;
+    }
+
+    public function notifyEditPesanan($value)
+    {
+        session()->flash('info', '<strong>Pesanan Diubah!</strong>.');
+        return 0;
+    }
+
     public function handleProsesSelesai($id)
     {
         Pesanan::find($id)->update([

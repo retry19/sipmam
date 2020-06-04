@@ -14,26 +14,35 @@ class NotificationIcon extends Component
 
     protected $listeners = [
         'echo:koki,MenuEmpty' => 'notifyMenuEmpty',
-        'echo:pelayan,OrderedPesanan' => 'notifyOrderedPesanan',
-        'echo:pelayan,AddedPesanan' => 'notifyAddedPesanan',
-        'echo:pelayan,DeletedPesanan' => 'notifyDeletedPesanan',
+        // 'echo:koki,MenuEmpty' => 'notifyMenuEmpty',
+        'echo:pelayan,OrderedPesanan' => 'notifyPesanan',
+        // 'echo:pelayan,AddedPesanan' => 'notifyAddedPesanan',
+        'echo:pelayan,AddedPesanan' => 'notifyPesanan',
+        'echo:pelayan,DeletedPesanan' => 'notifyPesanan',
+        // 'echo:pelayan,DeletedPesanan' => 'notifyDeletedPesanan',
         'readNotif' => 'handleReadNotif'
     ];
 
-    public function notifyOrderedPesanan($value)
+    public function notifyMenuEmpty($value)
     {
-        return $this->storeNotification($value, 'OrderedPesanan');
+        session()->flash('info', '<strong>Pesanan Kosong!</strong> Terdapat pesanan yang stoknya kosong.');
+        return 0;
     }
 
-    public function notifyAddedPesanan($value)
+    public function notifyPesanan($value)
     {
-        return $this->storeNotification($value, 'AddedPesanan');
+        return 0;
     }
 
-    public function notifyDeletedPesanan($value)
-    {
-        return $this->storeNotification($value, 'DeletedPesanan');
-    }
+    // public function notifyAddedPesanan($value)
+    // {
+    //     return $this->storeNotification($value, 'AddedPesanan');
+    // }
+
+    // public function notifyDeletedPesanan($value)
+    // {
+    //     return $this->storeNotification($value, 'DeletedPesanan');
+    // }
 
     public function handleReadNotif()
     {
@@ -43,10 +52,10 @@ class NotificationIcon extends Component
                                     ->get();
     }
 
-    public function notifyMenuEmpty($value)
-    {
-        return $this->storeNotification($value, 'MenuEmpty');
-    }
+    // public function notifyMenuEmpty($value)
+    // {
+    //     return $this->storeNotification($value, 'MenuEmpty');
+    // }
 
     private function storeNotification($value, $type)
     {
@@ -86,6 +95,8 @@ class NotificationIcon extends Component
             'role' => $role,
             'aksi' => $aksi
         ]);
+
+        return;
     }
 
     public function mount($role)

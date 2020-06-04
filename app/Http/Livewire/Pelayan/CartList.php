@@ -5,6 +5,7 @@ namespace App\Http\Livewire\Pelayan;
 use App\Menu;
 use App\DetailPesanan;
 use App\Events\OrderedPesanan;
+use App\Notification;
 use App\Pesanan;
 use Carbon\Carbon;
 use Livewire\Component;
@@ -33,6 +34,15 @@ class CartList extends Component
         }
     }
 
+    private function storeNotification($id)
+    {
+        Notification::create([
+            'pesanan_id' => $id,
+            'message' => 'Pesanan baru telah ditambahkan...',
+            'role' => 'koki',
+            'aksi' => 0
+        ]);
+    }
 
     public function handleSubmitOrder($totalHarga)
     {
@@ -66,7 +76,8 @@ class CartList extends Component
 
         event(new OrderedPesanan($pesanan->id));
 
-        session()->flash('success', '<strong>Selamat!</strong> Pemesanan makanan telah berhasil dilakukan.');
+        $this->storeNotification($pesanan->id);
+        
         return redirect()->route('pelayan.order');
     }
 

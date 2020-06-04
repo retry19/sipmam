@@ -21,6 +21,8 @@ class OrderIndex extends Component
     public function handleSubmitOrder($totalHarga)
     {
         $this->handleCancelOrder();
+        
+        session()->flash('success', '<strong>Selamat!</strong> Pemesanan makanan telah berhasil dilakukan.');
     }
 
     public function handleCancelOrder()
