@@ -22,12 +22,12 @@ class NotificationIcon extends Component
 
     public function notifyOrderedPesanan($value)
     {
-        $this->storeNotification($value, 'OrderedPesanan');
+        return $this->storeNotification($value, 'OrderedPesanan');
     }
 
     public function notifyAddedPesanan($value)
     {
-        $this->storeNotification($value, 'AddedPesanan');
+        return $this->storeNotification($value, 'AddedPesanan');
     }
 
     public function notifyDeletedPesanan($value)
@@ -45,7 +45,7 @@ class NotificationIcon extends Component
 
     public function notifyMenuEmpty($value)
     {
-        $this->storeNotification($value, 'MenuEmpty');
+        return $this->storeNotification($value, 'MenuEmpty');
     }
 
     private function storeNotification($value, $type)

@@ -15,6 +15,13 @@
   <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,500,700" rel="stylesheet">
   <link rel="stylesheet" href="{{ asset('css/app.css') }}">
   @yield('css')
+
+  <script src="{{ asset('js/app.js') }}"></script>
+  <script src="{{ asset('js/jquery.min.js') }}"></script>
+  <script src="{{ asset('js/bootstrap.bundle.min.js') }}"></script>
+  <script src="{{ asset('vendor/overlayScrollbars/js/jquery.overlayScrollbars.min.js') }}" async></script>
+  <script src="{{ asset('js/adminlte.js') }}" async></script>
+
   <livewire:styles />
   <livewire:scripts />
 </head>
@@ -178,22 +185,16 @@
   </div>
   <!-- ./wrapper -->
 
-  <!-- REQUIRED SCRIPTS -->
-
-  <script src="{{ asset('js/app.js') }}"></script>
-  <!-- jQuery -->
+  {{-- <script src="{{ asset('js/app.js') }}"></script>
   <script src="{{ asset('js/jquery.min.js') }}"></script>
-  <!-- Bootstrap -->
   <script src="{{ asset('js/bootstrap.bundle.min.js') }}"></script>
   <script src="{{ asset('vendor/overlayScrollbars/js/jquery.overlayScrollbars.min.js') }}"></script>
-
-  <!-- AdminLTE -->
-  <script src="{{ asset('js/adminlte.js') }}"></script>
+  <script src="{{ asset('js/adminlte.js') }}"></script> --}}
 
   <!-- OPTIONAL SCRIPTS -->
   {{-- <script src="{{ asset('js/Chart.min.js') }}"></script> --}}
   {{-- <script src="{{ asset('js/demo.js') }}"></script> --}}
-  <script src="{{ asset('js/dashboard3.js') }}"></script>
+  {{-- <script src="{{ asset('js/dashboard3.js') }}"></script> --}}
   @yield('js')
 </body>
 </html>
