@@ -107,12 +107,14 @@ class NotificationIcon extends Component
     public function render()
     {
         $this->notifications = Notification::whereDate('created_at', Carbon::today())
+                                    ->whereNotNull('pesanan_id')
                                     ->where('role', $this->getRole)
                                     ->orderBy('selesai', 'asc')
                                     ->orderBy('id', 'desc')
                                     ->get();
-
+                                    
         $this->countNewNotif = Notification::whereDate('created_at', Carbon::today())
+                                    ->whereNotNull('pesanan_id')
                                     ->where('role', $this->getRole)
                                     ->where('selesai', '0')
                                     ->count();

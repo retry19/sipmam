@@ -36,11 +36,13 @@ class NotificationList extends Component
     public function render()
     {
         $notifications = Notification::where('role', auth()->user()->role)
+                            ->whereNotNull('pesanan_id')
                             ->orderBy('selesai', 'asc')
                             ->orderBy('id', 'desc')
                             ->paginate(10);
 
         $countNotif = Notification::where('role', auth()->user()->role)
+                        ->whereNotNull('pesanan_id')
                         ->count();
         
         $this->countNotif = $countNotif;
