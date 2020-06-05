@@ -12,6 +12,14 @@ class PesananIndex extends Component
     public $mejaSearch = null;
     public $i = 1;
 
+    protected $listeners = ['echo:koki,MenuEmpty' => 'notifyMenuEmpty'];
+
+    public function notifyMenuEmpty($value)
+    {
+        session()->flash('info', '<strong>Pesanan Kosong!</strong> Terdapat pesanan yang stoknya kosong.');
+        return 0;
+    }
+
     public function handleStatusSelected($status)
     {
         $this->statusSelected = $status;
