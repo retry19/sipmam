@@ -19,3 +19,4 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 
 Route::get('pesanan/{id}/list', 'AjaxController@detailPesanan');
+Route::get('menu/{id}', 'AjaxController@detailMenu');

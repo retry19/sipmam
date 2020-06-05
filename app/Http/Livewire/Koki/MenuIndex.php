@@ -3,6 +3,7 @@
 namespace App\Http\Livewire\Koki;
 
 use App\Menu;
+use Illuminate\Support\Facades\Storage;
 use Livewire\Component;
 use Livewire\WithPagination;
 
@@ -14,7 +15,10 @@ class MenuIndex extends Component
 
     public function deleteMenu($id)
     {
-        Menu::destroy($id);
+        $menu = Menu::find($id);
+
+        Storage::disk('public')->delete($menu->foto_menu);
+        $menu->delete();
 
         session()->flash('success', '<strong>Terhapus!</strong> menu telah dihapus.');
 

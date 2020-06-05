@@ -10,7 +10,7 @@
         @endif
         <div class="card shadow-none">
             <div class="card-header">
-                <h3 class="card-title">Daftar Menu</h3>
+                <h3 class="card-title">Menu</h3>
             </div>
             <div class="card-body table-responsive p-0">
                 <table class="table table-hover">
@@ -43,32 +43,32 @@
                             <tr class="text-center">
                                 <td>{{ $no++ }}</td>
                                 <td class="text-left">{{ $menu->nama_menu }}</td>
-                                <td class="text-left">
-                                    <img src="{{ asset('img/foods/'.$menu->foto_menu) }}" alt="{{ $menu->foto_menu }}" class="img-fluid" width="60">
+                                <td>
+                                    <img src="{{ asset($menu->fotoMenuPath) }}" alt="{{ $menu->nama_menu }}" class="img-fluid" width="60">
                                 </td>
                                 <td>{{ $menu->jenis_menu }}</td>
                                 <td>{{ $menu->jml_tersedia }}</td>
                                 <td>{{ $menu->jml_dipesan }}</td>
-                                <td>Rp. {{ $menu->harga }}</td>
+                                <td class="text-left">Rp. {{ $menu->harga }}</td>
                                 <td>
                                     {!! $menu->kosong || $menu->jml_tersedia <= $menu->jml_dipesan ? '<i class="fas fa-check"></i>' : '' !!}
                                 </td>
                                 <td>
-                                    <button type="button" class="btn btn-sm btn-warning">
+                                    <a href="{{ route('koki.menu-edit', $menu->id) }}" class="btn btn-sm btn-warning">
                                         <i class="fas fa-pencil-alt"></i>
-                                    </button> &nbsp;
-                                    <button type="button" class="btn btn-sm btn-danger" data-toggle="modal" data-target="#deleteModal">
+                                    </a> &nbsp;
+                                    <button type="button" class="btn btn-sm btn-danger" data-toggle="modal" data-target="#deleteModal{{ $menu->id }}">
                                         <i class="fas fa-trash"></i>
                                     </button>
                                 </td>
                             </tr>
 
                             <!-- Modal -->
-                            <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel" aria-hidden="true">
+                            <div class="modal fade" id="deleteModal{{ $menu->id }}" tabindex="-1" role="dialog" aria-labelledby="deleteModal{{ $menu->id }}Label" aria-hidden="true">
                                 <div class="modal-dialog">
                                 <div class="modal-content">
                                     <div class="modal-header">
-                                        <h5 class="modal-title" id="deleteModalLabel">Hapus Menu</h5>
+                                        <h5 class="modal-title" id="deleteModal{{ $menu->id }}Label">Hapus Menu</h5>
                                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                             <span aria-hidden="true">&times;</span>
                                         </button>
@@ -92,8 +92,10 @@
             </div>
         </div>
     </div>
+
 </div>
 
-@section('title', 'Menu')
+@section('title', 'Daftar Menu')
 @section('menu', 'active')
-@section('heading', 'Menu')
+@section('menu-all', 'active')
+@section('heading', 'Daftar Menu')

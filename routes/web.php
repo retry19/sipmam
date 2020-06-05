@@ -39,6 +39,8 @@ Route::group(['middleware' => 'auth', 'prefix' => 'dashboard'], function () {
         Route::livewire('/pesanan', 'koki.pesanan-index')->name('koki.pesanan-all');
         Route::livewire('/pesanan/{id}/edit', 'koki.pesanan-menu-empty')->name('koki.pesanan-edit');
         Route::livewire('/menu', 'koki.menu-index')->name('koki.menu-all');
+        Route::livewire('/menu/add', 'koki.menu-add')->name('koki.menu-add');
+        Route::livewire('/menu/{id}/edit', 'koki.menu-edit')->name('koki.menu-edit');
     });
 
     Route::livewire('/notification', 'notification-list')->name('notif.all');

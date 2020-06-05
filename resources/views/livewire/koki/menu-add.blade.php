@@ -10,7 +10,7 @@
         @endif
         <div class="card shadow-none">
             <div class="card-header">
-                <h3 class="card-title">Edit Menu</h3>
+                <h3 class="card-title">Menu Baru</h3>
             </div>
             <div class="card-body">
                 <div class="form-group">
@@ -39,33 +39,21 @@
                     @enderror
                 </div>
                 <div class="form-group">
-                    <label for="jml_dipesan">Jumlah Dipesan</label>
-                    <input wire:model="jmlDipesan" type="number" class="form-control" id="jml_dipesan" min="0" placeholder="Jumlah dipesan">
-                    @error('jmlDipesan')
-                        <small class="text-danger">{{ $message }}</small>
-                    @enderror
-                </div>
-                <div class="form-group">
                     <label for="harga">Harga</label>
                     <input wire:model="harga" type="number" class="form-control" id="harga" min="1" placeholder="Harga jual">
                     @error('harga')
                         <small class="text-danger">{{ $message }}</small>
                     @enderror
                 </div>
-                <div class="form-group form-check">
-                    <input wire:model="kosong" type="checkbox" class="form-check-input" id="kosong">
-                    <label for="kosong" class="form-check-label">Kosong</label>
-                    @error('kosong')
-                        <small class="text-danger">{{ $message }}</small>
-                    @enderror
-                </div>
                 <div class="form-row">
-                    <div class="form-group col-md-4">
-                        <img src="{{ $fotoMenu ? $fotoMenu : asset('storage/'.$fotoMenuOld) }}" class="img-fluid">
-                    </div>
+                    @if ($fotoMenu)
+                        <div class="form-group col-md-4">
+                            <img src="{{ $fotoMenu }}" class="img-fluid">
+                        </div>
+                    @endif
                     <div class="form-group col-md-8">
                         <label for="foto_menu">Foto Menu</label>
-                        <input wire:change="$emit('fotoUpdateChoosen')" type="file" class="form-control-file" id="foto-menu">
+                        <input wire:change="$emit('fotoChoosen')" type="file" class="form-control-file" id="foto-menu">
                         @error('fotoMenu')
                             <small class="text-danger">{{ $message }}</small>
                         @enderror
@@ -73,7 +61,7 @@
                 </div>
                 <div class="float-right">
                     <button class="btn btn-outline-secondary">Reset</button>&nbsp;
-                    <button wire:click="updateMenu" class="btn btn-primary">Simpan</button>
+                    <button wire:click="storeMenu" class="btn btn-primary">Simpan</button>
                 </div>
             </div>
         </div>
@@ -81,20 +69,20 @@
 </div>
 
 <script>
-    window.livewire.on('fotoUpdateChoosen', () => {
+    window.livewire.on('fotoChoosen', () => {
         let img = document.getElementById('foto-menu').files[0];
         
         let reader = new FileReader();
 
         reader.onloadend = () => {
-            window.livewire.emit('fotoUpdateUpload', reader.result);
+            window.livewire.emit('fotoUpload', reader.result);
         }
 
         reader.readAsDataURL(img);
     });
 </script>
 
-@section('title', 'Edit Menu')
+@section('title', 'Tambah Menu')
 @section('menu', 'active')
 @section('menu-add', 'active')
-@section('heading', 'Edit Menu')
+@section('heading', 'Tambah Menu')

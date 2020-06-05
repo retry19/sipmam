@@ -4,6 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Support\Facades\Storage;
 
 class Menu extends Model
 {
@@ -15,5 +16,10 @@ class Menu extends Model
     public function detailPesanan()
     {
         return $this->hasMany('App\DetailPesanan', 'menu_id');
+    }
+
+    public function getFotoMenuPathAttribute()
+    {
+        return Storage::url($this->foto_menu);
     }
 }

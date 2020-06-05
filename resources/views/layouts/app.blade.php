@@ -117,12 +117,27 @@
                 </a>
               </li>
               <li class="nav-item">
-                <a href="{{ route('koki.menu-all') }}" class="nav-link @yield('menu')">
+                <a href="#" class="nav-link @yield('menu')">
                   <i class="nav-icon fas fa-book"></i>
                   <p>
                     Menu
+                    <i class="right fas fa-angle-left"></i>
                   </p>
                 </a>
+                <ul class="nav nav-treeview">
+                  <li class="nav-item">
+                    <a href="{{ route('koki.menu-all') }}" class="nav-link @yield('menu-all')">
+                      <i class="far fa-circle nav-icon"></i>
+                      <p>Daftar Menu</p>
+                    </a>
+                  </li>
+                  <li class="nav-item">
+                    <a href="{{ route('koki.menu-add') }}" class="nav-link @yield('menu-add')">
+                      <i class="far fa-circle nav-icon"></i>
+                      <p>Tambah Menu</p>
+                    </a>
+                  </li>
+                </ul>
               </li>
             @endif
             <li class="nav-header">OPTION</li>
