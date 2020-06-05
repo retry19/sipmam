@@ -18,4 +18,9 @@ class Pesanan extends Model
     {
         return $this->hasMany('App\Notification', 'pesanan_id');
     }
+
+    public function user()
+    {
+        return $this->belongsTo('App\User');
+    }
 }

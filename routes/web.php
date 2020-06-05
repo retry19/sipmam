@@ -22,11 +22,6 @@ Route::group(['middleware' => 'guest'], function() {
         ->layout('layouts.auth');
 });
 
-Route::get('/notif/{pesananId}/{menuId}', function ($pesananId, $menuId) {
-    event(new App\Events\MenuEmpty($pesananId, $menuId));
-    return "done.";
-});
-
 Route::group(['middleware' => 'auth', 'prefix' => 'dashboard'], function () {
     Route::get('/', function() { return view('layouts.app'); })->name('dashboard');
 
@@ -42,7 +37,9 @@ Route::group(['middleware' => 'auth', 'prefix' => 'dashboard'], function () {
         Route::livewire('/menu/add', 'koki.menu-add')->name('koki.menu-add');
         Route::livewire('/menu/{id}/edit', 'koki.menu-edit')->name('koki.menu-edit');
     });
+    Route::group(['middleware' => 'role:kasir'], function () {
+        Route::livewire('/list', 'kasir.pesanan-index')->name('kasir.pesanan-all');
+    });
 
     Route::livewire('/notification', 'notification-list')->name('notif.all');
-    // Route::livewire('/notification/{id}/done', 'notification-done')->name('notif.edit');
 });

@@ -39,7 +39,9 @@
 
       <!-- Right navbar links -->
       <ul class="navbar-nav ml-auto">
-        <livewire:notification-icon :role="auth()->user()->role" />
+        @if (auth()->user()->role == 'pelayan' || auth()->user()->role == 'koki')
+          <livewire:notification-icon :role="auth()->user()->role" />  
+        @endif
         
         @if(auth()->user()->role == 'pelayan')
           <li class="nav-item">
@@ -102,6 +104,7 @@
                 </a>
               </li>
             @endif
+
             @if(auth()->user()->role == 'koki')
               <li class="nav-header">KOKI</li>
               <li class="nav-item">
@@ -140,19 +143,40 @@
                 </ul>
               </li>
             @endif
+
+            @if(auth()->user()->role == 'kasir')
+              <li class="nav-header">KASIR</li>
+              <li class="nav-item">
+                <a href="{{ route('kasir.pesanan-all') }}" class="nav-link @yield('pesanan')">
+                  <i class="nav-icon fas fa-calendar-alt"></i>
+                  <p>
+                    Pesanan
+                    @php
+                      $jmlPesanan = App\Pesanan::whereDate('created_at', Carbon\Carbon::today())->count();
+                    @endphp
+                    <span class="badge badge-info right">{{ $jmlPesanan }}</span>
+                  </p>
+                </a>
+              </li>
+            @endif
+
             <li class="nav-header">OPTION</li>
-            <li class="nav-item">
-              <a href="{{ route('notif.all') }}" class="nav-link @yield('notif')">
-                <i class="nav-icon fas fa-bell"></i>
-                <p>
-                  Notifikasi
-                  @php
-                    $jmlNotif = App\Notification::whereDate('created_at', Carbon\Carbon::today())->where('role', auth()->user()->role)->count();
-                  @endphp
-                  <span class="badge badge-info right">{{ $jmlNotif }}</span>
-                </p>
-              </a>
-            </li>
+
+            @if (auth()->user()->role == 'pelayan' || auth()->user()->role == 'koki')
+              <li class="nav-item">
+                <a href="{{ route('notif.all') }}" class="nav-link @yield('notif')">
+                  <i class="nav-icon fas fa-bell"></i>
+                  <p>
+                    Notifikasi
+                    @php
+                      $jmlNotif = App\Notification::whereDate('created_at', Carbon\Carbon::today())->where('role', auth()->user()->role)->count();
+                    @endphp
+                    <span class="badge badge-info right">{{ $jmlNotif }}</span>
+                  </p>
+                </a>
+              </li>
+            @endif
+
             <li class="nav-item">
               <livewire:auth.logout />
             </li>
