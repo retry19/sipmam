@@ -23,4 +23,9 @@ class Pesanan extends Model
     {
         return $this->belongsTo('App\User');
     }
+
+    public function getTotalHargaFormatAttribute()
+    {
+        return 'Rp. '.number_format($this->total_harga, 2, ',', '.');
+    }
 }

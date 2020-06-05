@@ -22,4 +22,9 @@ class Menu extends Model
     {
         return Storage::url($this->foto_menu);
     }
+
+    public function getHargaFormatAttribute()
+    {
+        return 'Rp. '.number_format($this->harga, 2, ',', '.');
+    }
 }
