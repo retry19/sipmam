@@ -21,6 +21,7 @@ class CreateMenusTable extends Migration
             $table->unsignedTinyInteger('jml_tersedia');
             $table->unsignedTinyInteger('jml_dipesan')->default(0);
             $table->integer('harga');
+            $table->softDeletes();
         });
     }
 

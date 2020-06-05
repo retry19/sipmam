@@ -116,6 +116,14 @@
                   </p>
                 </a>
               </li>
+              <li class="nav-item">
+                <a href="{{ route('koki.menu-all') }}" class="nav-link @yield('menu')">
+                  <i class="nav-icon fas fa-book"></i>
+                  <p>
+                    Menu
+                  </p>
+                </a>
+              </li>
             @endif
             <li class="nav-header">OPTION</li>
             <li class="nav-item">

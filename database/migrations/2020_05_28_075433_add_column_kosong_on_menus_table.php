@@ -14,7 +14,9 @@ class AddColumnKosongOnMenusTable extends Migration
     public function up()
     {
         Schema::table('menus', function (Blueprint $table) {
-            $table->boolean('kosong')->default(false);
+            $table->boolean('kosong')
+                ->default(false)
+                ->after('harga');
         });
     }
 
