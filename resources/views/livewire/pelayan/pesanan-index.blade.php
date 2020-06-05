@@ -100,9 +100,11 @@
                                     <a href="#detailModal" class="btn btn-sm btn-secondary" data-toggle="modal" data-pesanan="{{ $item->id }}">
                                         <i class="fas fa-search"></i>
                                     </a>
-                                    <a href="{{ route('pelayan.pesanan-edit', $item->id) }}" class="btn btn-sm btn-warning">
-                                        <i class="fas fa-edit"></i>
-                                    </a>
+                                    @if ($item->status <= 1)
+                                        <a href="{{ route('pelayan.pesanan-edit', $item->id) }}" class="btn btn-sm btn-warning">
+                                            <i class="fas fa-edit"></i>
+                                        </a>
+                                    @endif
                                 </td>
                             </tr>
                         @endforeach

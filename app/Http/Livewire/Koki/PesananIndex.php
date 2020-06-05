@@ -2,6 +2,8 @@
 
 namespace App\Http\Livewire\Koki;
 
+use App\Events\ServedPesanan;
+use App\Notification;
 use App\Pesanan;
 use Carbon\Carbon;
 use Livewire\Component;
@@ -17,6 +19,16 @@ class PesananIndex extends Component
         'echo:pelayan,AddedPesanan' => 'notifyEditPesanan',
         'echo:pelayan,DeletedPesanan' => 'notifyEditPesanan'
     ];
+
+    private function storeNotification($pesananId)
+    {
+        Notification::create([
+            'pesanan_id' => $pesananId,
+            'message' => 'Pesanan telah disajikan...',
+            'role' => 'kasir',
+            'aksi' => 0
+        ]);
+    }
 
     public function notifyPesanan($value)
     {
@@ -36,7 +48,11 @@ class PesananIndex extends Component
             'status' => 2
         ]);
 
+        $this->storeNotification($id);
+        event(new ServedPesanan($id));
         $this->refreshListProsesPesanan();
+
+        session()->flash('success', '<strong>Selesai!</strong> Pesanan telah disajikan.');
     }
 
     public function handleProsesPesanan($id)
