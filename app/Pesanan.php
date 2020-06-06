@@ -9,6 +9,8 @@ class Pesanan extends Model
     protected $table = 'pesanan';
     protected $guarded = [];
 
+    const TAX = 1;
+
     public function detailPesanan()
     {
         return $this->hasMany('App\DetailPesanan', 'pesanan_id');
@@ -32,5 +34,10 @@ class Pesanan extends Model
     public function getTotalHargaFormatAttribute()
     {
         return 'Rp. '.number_format($this->total_harga, 2, ',', '.');
+    }
+
+    public function getDateFormatAttribute()
+    {
+        return $this->created_at->format('d-m-Y');
     }
 }
