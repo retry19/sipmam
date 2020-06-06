@@ -25,7 +25,10 @@
                         <td>Rp. {{ $menu['harga'] }}</td>
                         <td class="text-center">
                             @if (!$menu['kosong'] && $menu['jml_tersedia'] > $menu['jml_dipesan'])
-                                <button type="button" wire:click="$emit('addPesanan', {{ $menu['id'] }})" class="btn btn-sm btn-primary"><i class="fas fa-plus"></i></a>
+                                <button type="button" wire:click="addPesanan({{ $menu['id'] }})" wire:loading.class="disabled" class="btn btn-sm btn-primary">
+                                    <span wire:loading class="spinner-border spinner-border-sm" aria-hidden="true"></span>
+                                    <i wire:loading.remove class="fas fa-plus"></i>
+                                </a>
                             @else
                                 <p class="text-danger">Kosong</p>
                             @endif

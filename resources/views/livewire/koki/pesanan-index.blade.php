@@ -47,7 +47,10 @@
                     <div class="card-header">
                         <h3 class="card-title">Meja {{ $p->no_meja }}</h3>
                         <div class="float-right btn-group">
-                            <button wire:click="handleProsesSelesai({{ $p->id }})" type="button" class="btn btn-warning btn-sm" {{ $this->checkMenuKosong($p->detailPesanan) ? 'disabled' : '' }}>Selesai</button>
+                            <button wire:click="handleProsesSelesai({{ $p->id }})" type="button" wire:target="handleProsesSelesai" wire:loading.class="disabled" class="btn btn-warning btn-sm" {{ $this->checkMenuKosong($p->detailPesanan) ? 'disabled' : '' }}>
+                                <span wire:loading wire:target="handleProsesSelesai" class="spinner-border spinner-border-sm" aria-hidden="true"></span>
+                                <span wire:loading.remove wire:target="handleProsesSelesai">Selesai</span>
+                            </button>
                             <button type="button" class="btn btn-warning btn-sm dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <span class="sr-only">Toggle Dropdown</span>
                             </button>

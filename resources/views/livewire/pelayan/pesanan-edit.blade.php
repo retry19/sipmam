@@ -34,13 +34,21 @@
                                         <td>{{ $detailPesanan->menu->nama_menu }}</td>
                                         <td class="text-center">{!! !$detailPesanan->menu->kosong ? 'Rp. '.$detailPesanan->menu->harga : '<strong class="text-danger">Kosong</strong>' !!}</td>
                                         <td class="text-center">
-                                            <button type="button" data-target="#modalDeletePesanan{{ $no }}" class="btn btn-sm btn-danger" data-toggle="modal"><i class="fas fa-times"></i></a>
+                                            {{-- <button type="button" data-target="#modalDeletePesanan{{ $no }}" wire:loading.class="disabled" wire:target="deletePesanan" class="btn btn-sm btn-danger" data-toggle="modal">
+                                                <span wire:loading wire:target="deletePesanan" class="spinner-border spinner-border-sm" aria-hidden="true"></span>
+                                                <i wire:loading.remove wire:target="deletePesanan" class="fas fa-times"></i>
+                                            </a> --}}
+
+                                            <button wire:click="deletePesanan({{ $detailPesanan->id }})" wire:loading.class="disabled" wire:target="deletePesanan" class="btn btn-sm btn-danger">
+                                                <span wire:loading wire:target="deletePesanan" class="spinner-border spinner-border-sm" aria-hidden="true"></span>
+                                                <i wire:loading.remove wire:target="deletePesanan" class="fas fa-times"></i>
+                                            </button>
                                         </td>
                                     </tr>
                                     @php $totalHarga += $detailPesanan->menu->harga @endphp
 
                                     <!-- Modal -->
-                                    <div class="modal fade" id="modalDeletePesanan{{ $no }}" tabindex="-1" role="dialog" aria-labelledby="modalDeletePesananLabel{{ $no }}" aria-hidden="true">
+                                    {{-- <div class="modal fade" id="modalDeletePesanan{{ $no }}" tabindex="-1" role="dialog" aria-labelledby="modalDeletePesananLabel{{ $no }}" aria-hidden="true">
                                         <div class="modal-dialog">
                                             <div class="modal-content">
                                                 <div class="modal-header">
@@ -55,54 +63,16 @@
                                                         <p id="namaMenu" class="h5">{{ $detailPesanan->menu->nama_menu }}</p>
                                                     </div>
                                                     <div class="modal-footer" id="modal-footer">
-                                                        <button wire:click.prevent="deletePesanan({{ $detailPesanan->id }})" class="btn btn-danger" data-dismiss="modal" aria-label="Close">Ya, Hapus</button>
+                                                        <button wire:click="deletePesanan({{ $detailPesanan->id }})" class="btn btn-danger" data-dismiss="modal" aria-label="Close">Ya, Hapus</button>
                                                     </div>
                                                 </form>
                                             </div>
                                         </div>
-                                    </div>
+                                    </div> --}}
                                 @endfor
                             @endforeach
                         @endif
                     </tbody>
-                    {{-- <tbody>
-                        @foreach ($listPesanan as $item)
-                            @for ($i = 0; $i < $item['jml_pesan']; $i++)
-                                <tr>
-                                    <td scope="row" class="text-center">{{ $no++ }}</td>
-                                    <td>{{ $item['nama_menu'] }}</td>
-                                    <td class="text-center">{!! !$item['kosong'] ? 'Rp. '.$item['harga'] : '<strong class="text-danger">Kosong</strong>' !!}</td>
-                                    <td class="text-center">
-                                        <button type="button" data-target="#modalDeletePesanan{{ $no }}" class="btn btn-sm btn-danger" data-toggle="modal"><i class="fas fa-times"></i></a>
-                                    </td>
-                                </tr>
-                                @php $totalHarga += $item['harga'] @endphp
-
-                                <!-- Modal -->
-                                <div class="modal fade" id="modalDeletePesanan{{ $no }}" tabindex="-1" role="dialog" aria-labelledby="modalDeletePesananLabel{{ $no }}" aria-hidden="true">
-                                    <div class="modal-dialog">
-                                        <div class="modal-content">
-                                            <div class="modal-header">
-                                                <h5 class="modal-title" id="modalDeletePesananLabel{{ $no }}">Detail Pesanan</h5>
-                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                    <span aria-hidden="true">&times;</span>
-                                                </button>
-                                            </div>
-                                            <form>
-                                                <div class="modal-body">
-                                                    <p>Apakah anda yakin akan menghapus 1 pesanan :</p>
-                                                    <p id="namaMenu" class="h5">{{ $item['nama_menu'] }}</p>
-                                                </div>
-                                                <div class="modal-footer" id="modal-footer">
-                                                    <button wire:click.prevent="deletePesanan({{ $item['id'] }})" class="btn btn-danger" data-dismiss="modal" aria-label="Close">Ya, Hapus</button>
-                                                </div>
-                                            </form>
-                                        </div>
-                                    </div>
-                                </div>
-                            @endfor
-                        @endforeach
-                    </tbody> --}}
                 </table>
             </div>
             <div class="card-footer text-right">
@@ -119,5 +89,5 @@
 @section('title', 'Edit Pesanan')
 @section('pesanan', 'active')
 @section('heading')
-    <a href="{{ route('pelayan.pesanan-all') }}" class="btn btn-secondary p text-white"><i class="fas fa-angle-left"></i>&nbsp; Kembali</a> &nbsp; Edit Pesanan
+    <a href="{{ route('pelayan.pesanan-all') }}" class="btn btn-sm btn-outline-secondary"><i class="fas fa-angle-left"></i>&nbsp; Kembali</a> &nbsp; Edit Pesanan
 @endsection
