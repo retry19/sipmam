@@ -7,6 +7,7 @@ use App\DetailPesanan;
 use App\Events\OrderedPesanan;
 use App\Notification;
 use App\Pesanan;
+use App\Transaksi;
 use Carbon\Carbon;
 use Livewire\Component;
 use Illuminate\Support\Facades\Auth;
@@ -56,6 +57,14 @@ class CartList extends Component
             throw $e;
         }
 
+        try {
+            Transaksi::create([
+                'pesanan_id' => $pesanan->id,
+            ]);
+        } catch (\Exception $e) {
+            throw $e;
+        }
+
         foreach ($this->cartDetail as $item) {
             try {
                 DetailPesanan::create([
@@ -72,13 +81,14 @@ class CartList extends Component
                 throw $e;
             }
         }
-        $this->handleCancelOrder();
 
         event(new OrderedPesanan($pesanan->id));
-
+        
         $this->storeNotification($pesanan->id);
         
-        return redirect()->route('pelayan.order');
+        $this->handleCancelOrder();
+
+        session()->flash('success', '<strong>Selamat!</strong> Pemesanan makanan telah berhasil dilakukan.');
     }
 
     public function handleCancelOrder()

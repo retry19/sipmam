@@ -54,13 +54,13 @@ class PesananEdit extends Component
 
         $this->pesananCount = DetailPesanan::where('pesanan_id', $this->getId)->count();
 
-        if ($this->pesananCount < 1) {
-            Pesanan::find($this->getId)
-                ->delete();
+        // if ($this->pesananCount < 1) {
+        //     Pesanan::find($this->getId)
+        //         ->delete();
 
-            session()->flash('success', '<strong>Selamat!</strong> Pesanan berhasil dihapus.');
-            return redirect()->route('pelayan.pesanan-all');
-        }
+        //     session()->flash('success', '<strong>Selamat!</strong> Pesanan berhasil dihapus.');
+        //     return redirect()->route('pelayan.pesanan-all');
+        // }
 
         event(new DeletedPesanan($this->getId, $id));
 
@@ -68,7 +68,8 @@ class PesananEdit extends Component
 
         session()->flash('success', '<strong>Selamat!</strong> Pesanan berhasil dihapus.');
        
-        return redirect()->route('pelayan.pesanan-edit', $this->getId);
+        $this->refreshListPesanan();
+        // return redirect()->route('pelayan.pesanan-edit', $this->getId);
     }
 
     public function handleAddPesanan($id)
@@ -112,7 +113,12 @@ class PesananEdit extends Component
 
         session()->flash('success', '<strong>Selamat!</strong> Pesanan berhasil ditambahkan.');
 
-        return redirect()->route('pelayan.pesanan-edit', $this->getId);
+        return $this->refreshListPesanan();
+        // return redirect()->route('pelayan.pesanan-edit', $this->getId);
+    }
+
+    private function refreshListPesanan() {
+        $this->listPesanan = Pesanan::find($this->getId);
     }
 
     public function togglePesananAdd()

@@ -13,6 +13,11 @@ class PesananAdd extends Component
 
     protected $listeners = ['closePesananAdd' => 'togglePesananAdd'];
 
+    public function addPesanan($id)
+    {
+        $this->emit('addPesanan', $id);
+    }
+
     public function togglePesananAdd()
     {
         $this->display = !$this->display;

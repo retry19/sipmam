@@ -32,6 +32,7 @@ class OrderedPesanan implements ShouldBroadcast
      */
     public function broadcastOn()
     {
-        return new Channel('pelayan');
+        // return new Channel('pelayan');
+        return ['pelayan'];
     }
 }

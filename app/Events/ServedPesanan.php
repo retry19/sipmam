@@ -32,6 +32,6 @@ class ServedPesanan implements ShouldBroadcast
      */
     public function broadcastOn()
     {
-        return new Channel('koki');
+        return ['koki'];
     }
 }

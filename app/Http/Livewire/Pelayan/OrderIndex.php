@@ -12,17 +12,21 @@ class OrderIndex extends Component
     public $cart = [];
 
     protected $listeners = [
+        'echo:koki,MenuEmpty' => 'notifyMenuEmpty',
         'menuSelected' => 'handleMenuSelected',
         'removeItemCart' => 'handleRemoveItem',
         'cancelOrder' => 'handleCancelOrder',
         'submitOrder' => 'handleSubmitOrder'
     ];
 
+    public function notifyMenuEmpty($value)
+    {
+        return 0;
+    }
+
     public function handleSubmitOrder($totalHarga)
     {
         $this->handleCancelOrder();
-        
-        session()->flash('success', '<strong>Selamat!</strong> Pemesanan makanan telah berhasil dilakukan.');
     }
 
     public function handleCancelOrder()

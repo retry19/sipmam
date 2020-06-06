@@ -33,6 +33,6 @@ class DeletedPesanan implements ShouldBroadcast
      */
     public function broadcastOn()
     {
-        return new Channel('pelayan');
+        return ['pelayan'];
     }
 }

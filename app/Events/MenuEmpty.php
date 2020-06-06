@@ -2,7 +2,6 @@
 
 namespace App\Events;
 
-use Carbon\Carbon;
 use Illuminate\Broadcasting\Channel;
 use Illuminate\Broadcasting\InteractsWithSockets;
 use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
@@ -33,6 +32,6 @@ class MenuEmpty implements ShouldBroadcast
      */
     public function broadcastOn()
     {
-        return new Channel('koki');
+        return ['koki'];
     }
 }

@@ -26,11 +26,16 @@ class NotificationIcon extends Component
     public function notifyMenuEmpty($value)
     {
         session()->flash('info', '<strong>Pesanan Kosong!</strong> Terdapat pesanan yang stoknya kosong.');
+
+        $this->emit('notifSound');
+        
         return 0;
     }
 
     public function notifyPesanan($value)
     {
+        $this->emit('notifSound');
+
         return 0;
     }
 
