@@ -15,7 +15,7 @@
             <div class="card-body table-responsive p-0">
                 <table class="table table-hover">
                     <thead>
-                        <tr>
+                        <tr class="text-center">
                             <th>#</th>
                             <th>Pelayan</th>
                             <th>No. Meja</th>
@@ -26,13 +26,23 @@
                     </thead>
                     <tbody>
                         @foreach ($pesanan as $p)
-                            <tr>
+                            <tr class="text-center">
                                 <td>{{ $no++ }}</td>
                                 <td>{{ $p->user->nama }}</td>
                                 <td>{{ $p->no_meja }}</td>
-                                <td>{{ $p->total_harga }}</td>
-                                <td>{{ $this->status($p->status) }}</td>
-                                <td></td>
+                                <td>{{ $p->totalHargaFormat }}</td>
+                                <td>
+                                    @if ($p->status <= 1)
+                                        <span class="badge badge-info">{{ $this->status($p->status) }}</span>
+                                    @else
+                                        <span class="badge badge-success">{{ $this->status($p->status) }}</span>
+                                    @endif
+                                </td>
+                                <td>
+                                    <a href="{{ route('kasir.pesanan-pay', $p->id) }}" class="btn btn-sm btn-warning">
+                                        <i class="fas fa-wallet"></i>&nbsp; Bayar
+                                    </a>
+                                </td>
                             </tr>
                         @endforeach
                     </tbody>

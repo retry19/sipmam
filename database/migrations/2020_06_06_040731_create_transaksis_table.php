@@ -18,8 +18,8 @@ class CreateTransaksisTable extends Migration
             $table->foreignId('pesanan_id')
                 ->constrained('pesanan')
                 ->onDelete('cascade');
-            $table->integer('total_bayar');
-            $table->boolean('status');
+            $table->integer('total_bayar')->default(0);
+            $table->boolean('status')->default(false);
             $table->timestamps();
         });
     }

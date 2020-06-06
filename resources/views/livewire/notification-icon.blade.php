@@ -29,3 +29,13 @@
         <a href="{{ route('notif.all') }}" class="dropdown-item dropdown-footer">See All Notifications</a>
     </div>
 </li>
+
+@section('js')
+    <script>
+        window.livewire.on('notifSound', () => {
+            let sound = new Audio('http://localhost:8000/audio/juntos.ogg');
+            
+            sound.play();
+        });
+    </script>
+@endsection

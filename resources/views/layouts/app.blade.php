@@ -168,10 +168,6 @@
                   <i class="nav-icon fas fa-bell"></i>
                   <p>
                     Notifikasi
-                    @php
-                      $jmlNotif = App\Notification::whereDate('created_at', Carbon\Carbon::today())->where('role', auth()->user()->role)->count();
-                    @endphp
-                    <span class="badge badge-info right">{{ $jmlNotif }}</span>
                   </p>
                 </a>
               </li>

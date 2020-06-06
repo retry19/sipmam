@@ -170,6 +170,16 @@ aside.control-sidebar {
   border-radius: 10px;
 }
 
+
+/* HALAMAN PAY (kasir) */
+input#totalBayar::-webkit-outer-spin-button,
+input#totalBayar::-webkit-inner-spin-button,
+input[type=number]#totalBayar {
+  -webkit-appearance: none;
+  -moz-appearance: textfield;
+  margin: 0;
+}
+
 @media (min-width: 575px) {
   .list-order .card {
     margin-top: .9rem;
