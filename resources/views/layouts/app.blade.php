@@ -19,6 +19,7 @@
   <script src="{{ asset('js/app.js') }}"></script>
   <script src="{{ asset('js/jquery.min.js') }}"></script>
   <script src="{{ asset('js/bootstrap.bundle.min.js') }}"></script>
+  <script src="{{ asset('js/Chart.min.js') }}"></script>
   <script src="{{ asset('vendor/overlayScrollbars/js/jquery.overlayScrollbars.min.js') }}" async></script>
   <script src="{{ asset('js/adminlte.js') }}" async></script>
 

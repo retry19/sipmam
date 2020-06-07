@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Pesanan;
+use App\Transaksi;
+use Illuminate\Support\Facades\DB;
 
 class AjaxController extends Controller
 {
@@ -25,5 +27,30 @@ class AjaxController extends Controller
         }
 
         return response()->json($list);
+    }
+
+    public function income()
+    {
+        $result = Transaksi::select(
+                        DB::raw('SUM(total_bayar) AS total_bayar'),
+                        DB::raw('SUM(kembali) AS kembali'),
+                        DB::raw("DATE_FORMAT(created_at, '%M') as month"))
+                    ->whereYear('created_at', now()->year)
+                    ->groupBy('month')
+                    ->get();
+
+        return response()->json($result);
+    }
+
+    public function pelanggan()
+    {
+        $result = Pesanan::select(
+                        DB::raw('COUNT(*) AS pelanggan'),
+                        DB::raw("DATE_FORMAT(created_at, '%M') as month"))
+                    ->whereYear('created_at', now()->year)
+                    ->groupBy('month')
+                    ->get();
+
+        return response()->json($result);
     }
 }

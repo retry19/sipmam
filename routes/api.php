@@ -19,4 +19,5 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 
 Route::get('pesanan/{id}/list', 'AjaxController@detailPesanan');
-Route::get('menu/{id}', 'AjaxController@detailMenu');
+Route::get('income/chart', 'AjaxController@income');
+Route::get('pelanggan/chart', 'AjaxController@pelanggan');
