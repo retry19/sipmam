@@ -100,6 +100,7 @@ class CartList extends Component
 
     public function handleCancelOrder()
     {
+        $this->noMeja = '';
         $this->cart = [];
         $this->cartDetail = [];
     }
