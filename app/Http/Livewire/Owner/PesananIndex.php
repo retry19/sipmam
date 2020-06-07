@@ -3,7 +3,6 @@
 namespace App\Http\Livewire\Owner;
 
 use App\Pesanan;
-use Carbon\Carbon;
 use Livewire\Component;
 use Livewire\WithPagination;
 use Codedge\Fpdf\Fpdf\Fpdf;
@@ -36,8 +35,8 @@ class PesananIndex extends Component
     {
         ob_start();
         $fpdf = new Fpdf();
-
-        $fpdf->AddPage();
+        
+        $fpdf->AddPage('L');
         $fpdf->SetFont('Arial', 'B', 24);
         
         $fpdf->Cell(30, 10, 'Data Pesanan');
@@ -52,31 +51,34 @@ class PesananIndex extends Component
         }
         
         $fpdf->Ln(25);
-
+        $fpdf->SetFont('Arial', 'B', 14);
+        
         // Header
-        $fpdf->Cell(10, 10, 'ID', 1);
-        $fpdf->Cell(30, 10, 'Pelayan', 1);
-        $fpdf->Cell(23, 10, 'No. Meja', 1);
-        $fpdf->Cell(30, 10, 'Total Harga', 1);
-        $fpdf->Cell(18, 10, 'Status', 1);
-        $fpdf->Cell(55, 10, 'Waktu', 1);
+        $fpdf->Cell(15, 10, 'ID', 1, 0, 'C');
+        $fpdf->Cell(30, 10, 'Pelayan', 1, 0, 'C');
+        $fpdf->Cell(25, 10, 'No. Meja', 1, 0, 'C');
+        $fpdf->Cell(50, 10, 'Total Harga', 1, 0, 'C');
+        $fpdf->Cell(50, 10, 'Status', 1, 0, 'C');
+        $fpdf->Cell(55, 10, 'Tanggal', 1, 0, 'C');
         $fpdf->Ln();
-
+        
+        $fpdf->SetFont('Arial', '', 14);
+        
         // body
         foreach ($data as $p) {
-            $fpdf->Cell(10, 10, $p->id, 1);
+            $fpdf->Cell(15, 10, $p->id, 1, 0, 'C');
             $fpdf->Cell(30, 10, $p->user->nama, 1);
-            $fpdf->Cell(23, 10, $p->no_meja, 1);
-            $fpdf->Cell(30, 10, $p->total_harga, 1);
-            $fpdf->Cell(18, 10, $p->status, 1);
-            $fpdf->Cell(55, 10, $p->created_at, 1);
+            $fpdf->Cell(25, 10, $p->no_meja, 1, 0, 'C');
+            $fpdf->Cell(50, 10, $p->totalHargaFormat, 1, 0, 'R');
+            $fpdf->Cell(50, 10, $this->status($p->status), 1, 0, 'C');
+            $fpdf->Cell(55, 10, $p->created_at, 1, 0, 'C');
             $fpdf->Ln();
         }
 
         $fpdf->Ln(10);
-        $fpdf->Cell(30, 10, 'Tanggal Cetak : '.Carbon::now());
+        $fpdf->Cell(30, 10, 'Tanggal Cetak : '.now());
 
-        $fpdf->Output('', Carbon::now()->format('Y-m-d').'-Data_Pesanan.pdf');
+        $fpdf->Output('', now()->format('Y-m-d').'-Data_Pesanan.pdf');
         ob_end_flush();
     }
 

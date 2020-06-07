@@ -45,16 +45,16 @@
                                 <th>No. Meja</th>
                                 <th>Total Harga</th>
                                 <th>Status</th>
-                                <th>Waktu</th>
+                                <th>Tanggal</th>
                             </tr>
                         </thead>
                         <tbody>
                             @foreach ($pesanan as $p)
                                 <tr class="text-center">
                                     <td>{{ $no++ }}</td>
-                                    <td>{{ $p->user->nama }}</td>
+                                    <td class="text-left">{{ $p->user->nama }}</td>
                                     <td>{{ $p->no_meja }}</td>
-                                    <td class="text-left">{{ $p->totalHargaFormat }}</td>
+                                    <td class="text-right">{{ $p->totalHargaFormat }}</td>
                                     <td>
                                         @if ($p->status <= 1)
                                             <span class="badge badge-info">{{ $this->status($p->status) }}</span>
