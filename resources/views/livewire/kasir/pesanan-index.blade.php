@@ -39,9 +39,15 @@
                                     @endif
                                 </td>
                                 <td>
-                                    <a href="{{ route('kasir.pesanan-pay', $p->id) }}" class="btn btn-sm btn-warning {{ $p->status == 2 ? '' : 'disabled' }}">
-                                        <i class="fas fa-wallet"></i>&nbsp; Bayar
-                                    </a>
+                                    @if ($p->status == 2)
+                                        <a href="{{ route('kasir.pesanan-pay', $p->id) }}" class="btn btn-sm btn-warning">
+                                            <i class="fas fa-wallet"></i>&nbsp; Bayar
+                                        </a>
+                                    @else
+                                        <a wire:click="printInvoice({{ $p->id }})" class="btn btn-sm btn-info text-white">
+                                            <i class="fas fa-download"></i>&nbsp; Invoice
+                                        </a>
+                                    @endif
                                 </td>
                             </tr>
                         @endforeach

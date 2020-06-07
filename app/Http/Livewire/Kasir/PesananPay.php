@@ -3,6 +3,7 @@
 namespace App\Http\Livewire\Kasir;
 
 use App\Pesanan;
+use Codedge\Fpdf\Fpdf\Fpdf;
 use Livewire\Component;
 
 class PesananPay extends Component
@@ -38,7 +39,7 @@ class PesananPay extends Component
         $pesanan->save();
 
         session()->flash('success', '<strong>Berhasil!</strong> pesanan telah dibayar.');
-
+        
         return redirect()->route('kasir.pesanan-all');
     }
 

@@ -136,7 +136,7 @@
 @section('title', 'Pembayaran')
 @section('pesanan', 'active')
 @section('heading')
-    <a class="btn btn-sm btn-outline-secondary">
+    <a href="{{ route('kasir.pesanan-all') }}" class="btn btn-sm btn-outline-secondary">
         <i class="fas fa-angle-left"></i>&nbsp;
         Kembali
     </a>&nbsp;
