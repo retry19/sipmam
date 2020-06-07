@@ -23,7 +23,7 @@ Route::group(['middleware' => 'guest'], function() {
 });
 
 Route::group(['middleware' => 'auth', 'prefix' => 'dashboard'], function () {
-    Route::get('/', function() { return view('layouts.app'); })->name('dashboard');
+    Route::livewire('/', 'dashboard')->name('dashboard');
 
     Route::group(['middleware' => 'role:pelayan'], function () {
         Route::livewire('/order', 'pelayan.order-index')->name('pelayan.order');
@@ -41,6 +41,9 @@ Route::group(['middleware' => 'auth', 'prefix' => 'dashboard'], function () {
         Route::livewire('/list', 'kasir.pesanan-index')->name('kasir.pesanan-all');
         Route::livewire('/list/{id}/pay', 'kasir.pesanan-pay')->name('kasir.pesanan-pay');
         Route::livewire('/transaksi', 'kasir.transaksi-index')->name('kasir.transaksi-all');
+    });
+    Route::group(['middleware' => 'role:owner', 'prefix' => 'data'], function () {
+        Route::livewire('/pesanan', 'owner.pesanan-index')->name('owner.pesanan-all');
     });
 
     Route::livewire('/notification', 'notification-list')->name('notif.all');

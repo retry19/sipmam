@@ -164,6 +164,18 @@
               </li>
             @endif
 
+            @if(auth()->user()->role == 'owner')
+              <li class="nav-header">OWNER</li>
+              <li class="nav-item">
+                <a href="{{ route('owner.pesanan-all') }}" class="nav-link @yield('pesanan')">
+                  <i class="nav-icon fas fa-calendar-alt"></i>
+                  <p>
+                    Pesanan
+                  </p>
+                </a>
+              </li>
+            @endif
+
             <li class="nav-header">OPTION</li>
 
             @if (auth()->user()->role == 'pelayan' || auth()->user()->role == 'koki')
