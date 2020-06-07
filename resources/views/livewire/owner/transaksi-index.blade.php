@@ -51,8 +51,8 @@
                             @foreach ($transaksi as $t)
                                 <tr class="text-center">
                                     <td>{{ $t->id }}</td>
-                                    <td>{{ $t->total_bayar }}</td>
-                                    <td>{{ $t->kembali }}</td>
+                                    <td class="text-right">{{ $this->hargaFormat($t->total_bayar) }}</td>
+                                    <td class="text-right">{{ $this->hargaFormat($t->kembali) }}</td>
                                     <td>
                                         @if ($t->status < 1)
                                             <span class="badge badge-info">Belum Bayar</span>
@@ -62,8 +62,15 @@
                                     </td>
                                     <td>{{ $t->created_at->format('Y-m-d') }}</td>
                                 </tr>
+                                @php $totalPemasukan += ($t->total_bayar - $t->kembali) @endphp
                             @endforeach
                         </tbody>
+                        <tfoot>
+                            <tr class="text-right">
+                                <th colspan="4">Total Pendapatan</th>
+                                <th>{{ $this->hargaFormat($totalPemasukan) }}</th>
+                            </tr>
+                        </tfoot>
                     </table>
 
                     {{ $transaksi->links() }}

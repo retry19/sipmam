@@ -15,6 +15,7 @@ class TransaksiIndex extends Component
     public $tglAwal;
     public $tglAkhir;
     public $showBy = '';
+    public $totalPemasukan = 0;
 
     public function printByDate($formData)
     {
@@ -36,7 +37,7 @@ class TransaksiIndex extends Component
         ob_start();
         $fpdf = new Fpdf();
 
-        $fpdf->AddPage();
+        $fpdf->AddPage('L');
         $fpdf->SetFont('Arial', 'B', 24);
         
         $fpdf->Cell(30, 10, 'Data Transaksi');
@@ -51,22 +52,25 @@ class TransaksiIndex extends Component
         }
         
         $fpdf->Ln(25);
-
+        $fpdf->SetFont('Arial', 'B', 14);
+        
         // Header
-        $fpdf->Cell(35, 10, 'ID', 1);
-        $fpdf->Cell(30, 10, 'Total Bayar', 1);
-        $fpdf->Cell(30, 10, 'Kembali', 1);
-        $fpdf->Cell(18, 10, 'Status', 1);
-        $fpdf->Cell(55, 10, 'Waktu', 1);
+        $fpdf->Cell(35, 10, 'ID', 1, 0, 'C');
+        $fpdf->Cell(50, 10, 'Total Bayar', 1, 0, 'C');
+        $fpdf->Cell(50, 10, 'Kembali', 1, 0, 'C');
+        $fpdf->Cell(40, 10, 'Status', 1, 0, 'C');
+        $fpdf->Cell(55, 10, 'Waktu', 1, 0, 'C');
         $fpdf->Ln();
+
+        $fpdf->SetFont('Arial', '', 14);
 
         // body
         foreach ($data as $p) {
-            $fpdf->Cell(35, 10, $p->id, 1);
-            $fpdf->Cell(30, 10, $p->total_bayar, 1);
-            $fpdf->Cell(30, 10, $p->kembali, 1);
-            $fpdf->Cell(18, 10, $p->status, 1);
-            $fpdf->Cell(55, 10, $p->created_at, 1);
+            $fpdf->Cell(35, 10, $p->id, 1, 0, 'C');
+            $fpdf->Cell(50, 10, $this->hargaFormat($p->total_bayar), 1, 0, 'R');
+            $fpdf->Cell(50, 10, $this->hargaFormat($p->kembali), 1, 0, 'R');
+            $fpdf->Cell(40, 10, $p->status < 1 ? 'Belum bayar' : 'Sudah bayar', 1, 0, 'C');
+            $fpdf->Cell(55, 10, $p->created_at, 1, 0, 'C');
             $fpdf->Ln();
         }
 
@@ -75,6 +79,11 @@ class TransaksiIndex extends Component
 
         $fpdf->Output('', Carbon::now()->format('Y-m-d').'-Data_Transaksi.pdf');
         ob_end_flush();
+    }
+
+    public function hargaFormat($price)
+    {
+        return 'Rp. '.number_format($price, 2, ',', '.');
     }
 
     public function showByDate()
