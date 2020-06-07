@@ -170,7 +170,15 @@
                 <a href="{{ route('owner.pesanan-all') }}" class="nav-link @yield('pesanan')">
                   <i class="nav-icon fas fa-calendar-alt"></i>
                   <p>
-                    Pesanan
+                    Data Pesanan
+                  </p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="{{ route('owner.transaksi-all') }}" class="nav-link @yield('transaksi')">
+                  <i class="nav-icon fas fa-money-check-alt"></i>
+                  <p>
+                    Data Transaksi
                   </p>
                 </a>
               </li>
