@@ -40,6 +40,7 @@ Route::group(['middleware' => 'auth', 'prefix' => 'dashboard'], function () {
     Route::group(['middleware' => 'role:kasir'], function () {
         Route::livewire('/list', 'kasir.pesanan-index')->name('kasir.pesanan-all');
         Route::livewire('/list/{id}/pay', 'kasir.pesanan-pay')->name('kasir.pesanan-pay');
+        Route::livewire('/transaksi', 'kasir.transaksi-index')->name('kasir.transaksi-all');
     });
 
     Route::livewire('/notification', 'notification-list')->name('notif.all');

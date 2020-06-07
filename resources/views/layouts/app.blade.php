@@ -151,10 +151,14 @@
                   <i class="nav-icon fas fa-calendar-alt"></i>
                   <p>
                     Pesanan
-                    @php
-                      $jmlPesanan = App\Pesanan::whereDate('created_at', Carbon\Carbon::today())->count();
-                    @endphp
-                    <span class="badge badge-info right">{{ $jmlPesanan }}</span>
+                  </p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="{{ route('kasir.transaksi-all') }}" class="nav-link @yield('transaksi')">
+                  <i class="nav-icon fas fa-money-check-alt"></i>
+                  <p>
+                    Transaksi
                   </p>
                 </a>
               </li>

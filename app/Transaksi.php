@@ -8,6 +8,7 @@ class Transaksi extends Model
 {
     protected $table = 'transaksi';
     protected $guarded = [];
+    protected $keyType = 'string';
 
     public function pesanan()
     {
