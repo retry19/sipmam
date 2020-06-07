@@ -14,6 +14,9 @@ class Login extends Component
         $this->validateOnly($field, [
             'username' => 'required',
             'password' => 'required'
+        ], [
+            'username.required' => 'Username harus diisi!.',
+            'password.required' => 'Password harus diisi!.'
         ]);
     }
 
@@ -22,6 +25,9 @@ class Login extends Component
         $this->validate([
             'username' => 'required',
             'password' => 'required'
+        ], [
+            'username.required' => 'Username harus diisi!.',
+            'password.required' => 'Password harus diisi!.'
         ]);
 
         if (Auth::attempt(['username' => $this->username, 'password' => $this->password])) {
