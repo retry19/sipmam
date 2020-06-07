@@ -182,6 +182,14 @@
                   </p>
                 </a>
               </li>
+              <li class="nav-item">
+                <a href="{{ route('owner.menu-all') }}" class="nav-link @yield('menu')">
+                  <i class="nav-icon fas fa-book"></i>
+                  <p>
+                    Data Menu
+                  </p>
+                </a>
+              </li>
             @endif
 
             <li class="nav-header">OPTION</li>

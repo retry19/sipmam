@@ -45,6 +45,7 @@ Route::group(['middleware' => 'auth', 'prefix' => 'dashboard'], function () {
     Route::group(['middleware' => 'role:owner', 'prefix' => 'data'], function () {
         Route::livewire('/pesanan', 'owner.pesanan-index')->name('owner.pesanan-all');
         Route::livewire('/transaksi', 'owner.transaksi-index')->name('owner.transaksi-all');
+        Route::livewire('/menu', 'owner.menu-index')->name('owner.menu-all');
     });
 
     Route::livewire('/notification', 'notification-list')->name('notif.all');
