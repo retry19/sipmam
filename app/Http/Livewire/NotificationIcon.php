@@ -27,14 +27,16 @@ class NotificationIcon extends Component
     {
         session()->flash('info', '<strong>Pesanan Kosong!</strong> Terdapat pesanan yang stoknya kosong.');
 
-        $this->emit('notifSound');
+        if (auth()->user()->role == 'pelayan')
+            $this->emit('notifSound');
         
         return 0;
     }
 
     public function notifyPesanan($value)
     {
-        $this->emit('notifSound');
+        if (auth()->user()->role == 'koki')
+            $this->emit('notifSound');
 
         return 0;
     }

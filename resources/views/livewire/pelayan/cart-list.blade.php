@@ -37,7 +37,7 @@
             <p>Total Harga :</p>
             <h4>Rp. {{ $totalHarga }}</h4>
         </div>
-        <button wire:click="$emit('submitOrder', {{ $totalHarga }})" class="btn btn-primary w-100 mb-2 <?php if($noMeja == null || $validNoMeja != 0) { echo 'btn-disabled'; } else { echo ''; } ?>" wire:loading.class="disabled">Order</button>
+        <button wire:click="submitOrder({{ $totalHarga }})" class="btn btn-primary w-100 mb-2 <?php if($noMeja == null || $validNoMeja != 0) { echo 'btn-disabled'; } else { echo ''; } ?>" wire:loading.class="disabled">Order</button>
         <button wire:click="$emit('cancelOrder')" class="btn btn-outline-secondary w-100 text-white" wire:loading.class="disabled">Batal</button>
     @endif
 </div>

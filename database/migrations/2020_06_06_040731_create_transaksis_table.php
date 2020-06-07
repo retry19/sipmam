@@ -14,11 +14,12 @@ class CreateTransaksisTable extends Migration
     public function up()
     {
         Schema::create('transaksi', function (Blueprint $table) {
-            $table->id();
+            $table->string('id', 12)->primary();
             $table->foreignId('pesanan_id')
                 ->constrained('pesanan')
                 ->onDelete('cascade');
             $table->integer('total_bayar')->default(0);
+            $table->integer('kembali')->default(0);
             $table->boolean('status')->default(false);
             $table->timestamps();
         });

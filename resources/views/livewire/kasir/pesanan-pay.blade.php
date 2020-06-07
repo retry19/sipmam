@@ -84,29 +84,33 @@
                     
                     <hr>
                     
-                    <div class="form-group row">
-                        <label for="" class="col-sm-4 col-form-label">Bayar</label>
-                        <div class="col-sm-8">
-                            <input wire:model="totalBayar" wire:loading.attr="disabled" wire:target="storePembayaran" type="number" min="0" class="form-control text-right" id="totalBayar">
-                            @error('totalBayar')
-                                <small class="text-danger">{{ $message }}</small>
-                            @enderror
+                    <form wire:submit.prevent="storePembayaran(Object.fromEntries(new FormData($event.target)))">
+                        <div class="form-group row">
+                            <label for="" class="col-sm-4 col-form-label">Bayar</label>
+                            <div class="col-sm-8">
+                                <input wire:model.debounce.500ms="totalBayar" wire:loading.attr="disabled" wire:target="storePembayaran" type="number" name="totalBayar" min="0" class="form-control text-right" id="totalBayar">
+                                @error('totalBayar')
+                                    <small class="text-danger">{{ $message }}</small>
+                                @enderror
+                            </div>
                         </div>
-                    </div>
-                    <div class="form-group row">
-                        <label for="" class="col-sm-4 col-form-label">Kembali</label>
-                        <div class="col-sm-8">
-                            <input type="text" class="form-control text-right" id="kembali" disabled>
+                        <div class="form-group row">
+                            <label for="" class="col-sm-4 col-form-label">Kembali</label>
+                            <div class="col-sm-8">
+                                <input type="text" name="kembali" class="form-control text-right" id="kembali" readonly>
+                            </div>
                         </div>
-                    </div>
+    
+                        <div class="pt-3 text-right">
+                            <button type="submit" wire:loading.class="disabled" class="btn btn-lg btn-primary">
+                                <span wire:loading wire:target="storePembayaran" class="spinner-border spinner-border-lg" aria-hidden="true"></span>
+                                <span wire:loading.remove wire:target="storePembayaran">Bayar Pesanan</span>
+                            </button>&nbsp;
+                            <button wire:click="resetTotalBayar" type="button" wire:loading.class="disabled" wire:target="storePembayaran" class="btn btn-lg btn-outline-secondary">Reset</button>
+                        </div>
+                    </form>
                 </div>
-                <div class="col-md-12 mt-3 text-right">
-                    <button wire:click="storePembayaran" type="button" wire:loading.class="disabled" class="btn btn-lg btn-primary">
-                        <span wire:loading wire:target="storePembayaran" class="spinner-border spinner-border-lg" aria-hidden="true"></span>
-                        <span wire:loading.remove wire:target="storePembayaran">Bayar Pesanan</span>
-                    </button>&nbsp;
-                    <button wire:click="resetTotalBayar" type="button" wire:loading.class="disabled" wire:target="storePembayaran" class="btn btn-lg btn-outline-secondary">Reset</button>
-                </div>
+
             </div>
         </div>
     </div>

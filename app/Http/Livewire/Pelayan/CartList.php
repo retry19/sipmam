@@ -23,7 +23,6 @@ class CartList extends Component
         'menuSelected' => 'handleShowCartList',
         'removeItemCart' => 'handleRemoveItem',
         'cancelOrder' => 'handleCancelOrder',
-        'submitOrder' => 'handleSubmitOrder',
     ];
 
     public function updated($field)
@@ -45,7 +44,7 @@ class CartList extends Component
         ]);
     }
 
-    public function handleSubmitOrder($totalHarga)
+    public function submitOrder($totalHarga)
     {
         try {
             $pesanan = new Pesanan;
@@ -58,7 +57,16 @@ class CartList extends Component
         }
 
         try {
+            $count = Transaksi::whereDate('created_at', Carbon::today())
+                        ->count();
+            $countId = $count + 1;
+
+            $strId = substr('000'.$countId, -3);
+
+            $transaksiId = 'T'.Carbon::today()->format('Ym').$strId;
+            
             Transaksi::create([
+                'id' => $transaksiId,
                 'pesanan_id' => $pesanan->id,
             ]);
         } catch (\Exception $e) {
@@ -87,8 +95,7 @@ class CartList extends Component
         $this->storeNotification($pesanan->id);
         
         $this->handleCancelOrder();
-
-        session()->flash('success', '<strong>Selamat!</strong> Pemesanan makanan telah berhasil dilakukan.');
+        $this->emit('submitOrder', $totalHarga);
     }
 
     public function handleCancelOrder()

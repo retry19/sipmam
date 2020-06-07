@@ -10,6 +10,13 @@ class PesananIndex extends Component
 {
     public $no = 1;
 
+    protected $listeners = ['echo:koki,ServedPesanan' => 'handleServedPesanan'];
+
+    public function handleServedPesanan($value)
+    {
+        return $this->emit('notifSound');
+    }
+
     public function status($status) {
         $result = '';
         switch ($status) {
@@ -33,6 +40,7 @@ class PesananIndex extends Component
     public function render()
     {
         $pesanan = Pesanan::whereDate('created_at', Carbon::today())
+                        ->orderBy('status', 'asc')
                         ->paginate(10);
 
         return view('livewire.kasir.pesanan-index', [

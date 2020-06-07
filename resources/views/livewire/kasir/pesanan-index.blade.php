@@ -39,7 +39,7 @@
                                     @endif
                                 </td>
                                 <td>
-                                    <a href="{{ route('kasir.pesanan-pay', $p->id) }}" class="btn btn-sm btn-warning">
+                                    <a href="{{ route('kasir.pesanan-pay', $p->id) }}" class="btn btn-sm btn-warning {{ $p->status == 2 ? '' : 'disabled' }}">
                                         <i class="fas fa-wallet"></i>&nbsp; Bayar
                                     </a>
                                 </td>
@@ -53,8 +53,17 @@
             </div>
         </div>
     </div>
-
 </div>
+
+@section('js')
+    <script>
+        window.livewire.on('notifSound', () => {
+            let sound = new Audio('http://localhost:8000/audio/juntos.ogg');
+            
+            sound.play();
+        });
+    </script>
+@endsection
 
 @section('title', 'List Pesanan')
 @section('pesanan', 'active')

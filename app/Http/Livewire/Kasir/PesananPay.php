@@ -18,7 +18,7 @@ class PesananPay extends Component
         return 'Rp. '.number_format($price, 2, ',', '.');
     }
 
-    public function storePembayaran()
+    public function storePembayaran($formData)
     {
         $this->validate([
             'totalBayar' => 'required|gte:totalHargaWithTax'
@@ -26,6 +26,20 @@ class PesananPay extends Component
             'totalBayar.required' => 'Jumlah bayar harus diisi!.',
             'totalBayar.gte' => 'Jumlah bayar kurang!.',
         ]);
+
+        $pesanan = Pesanan::find($this->getId);
+
+        $pesanan->transaksi->total_bayar = $formData['totalBayar'];
+        $pesanan->transaksi->kembali = $formData['kembali'];
+        $pesanan->transaksi->status = 1;
+        $pesanan->transaksi->save();
+        
+        $pesanan->status += 1;
+        $pesanan->save();
+
+        session()->flash('success', '<strong>Berhasil!</strong> pesanan telah dibayar.');
+
+        return redirect()->route('kasir.pesanan-all');
     }
 
     public function resetTotalBayar()
