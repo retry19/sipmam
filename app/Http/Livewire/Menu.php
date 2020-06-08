@@ -2,10 +2,10 @@
 
 namespace App\Http\Livewire;
 
-use App\Menu;
+use App\Menu as AppMenu;
 use Livewire\Component;
 
-class Home extends Component
+class Menu extends Component
 {
     public function hargaFormat($price)
     {
@@ -14,8 +14,8 @@ class Home extends Component
 
     public function render()
     {
-        $menus = Menu::all();
+        $menus = AppMenu::all();
 
-        return view('livewire.home', ['menus' => $menus]);
+        return view('livewire.menu', ['menus' => $menus]);
     }
 }

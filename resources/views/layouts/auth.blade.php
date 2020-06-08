@@ -9,7 +9,7 @@
   <link rel="stylesheet" href="{{ asset('vendor/fontawesome-free/css/all.min.css') }}">
   <link rel="stylesheet" href="{{ asset('vendor/overlayScrollbars/css/OverlayScrollbars.min.css') }}">
   <link rel="stylesheet" href="{{ asset('css/adminlte.min.css') }}">
-  <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,500,700" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Nunito:300,400,400i,500,700" rel="stylesheet">
   <link rel="stylesheet" href="{{ asset('css/app.css') }}">
   @yield('css')
 
@@ -26,9 +26,27 @@
 <body>
   @yield('content')
   
-  <footer class="mx-auto mb-3 w-100 px-3 d-flex justify-content-between" style="position: absolute; bottom: 0;">
-    <small class="text-muted">Built with ❤</small>
-    <small class="text-muted">© 2020</small>
+  <footer class="container">
+    <div class="row">
+      <div class="col-md-5">
+        <h5><b>SIPMAM</b> 2020</h5>
+      </div>
+      <div class="col-md-4">
+        <h5><b>Tentang kami</b></h5>
+        <p class="text-muted mb-5">Kedai makanan yang menyediakan<br>
+          berbagai menu makanan.</p>
+        <h5><b>Kontak</b></h5>
+        <p class="text-muted mb-5">hubungi@sipmam.com</p>
+      </div>
+      <div class="col-md-3">
+        <h5><b>Lokasi</b></h5>
+        <p class="text-muted mb-5">Jl. Dewi Sartika, Kuningan, <br>
+          Kec. Kuningan, Kab. Kuningan, <br>
+          Jawa Barat <br>
+          45511</p>
+        <p class="text-muted mb-5">Built with ❤</p>
+      </div>
+    </div>
   </footer>
 
   @yield('js')

@@ -16,6 +16,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::group(['middleware' => 'guest'], function() {
     Route::livewire('/', 'home')->layout('layouts.auth');
+    Route::livewire('/menu', 'menu')->layout('layouts.auth');
     Route::livewire('/login', 'auth.login')->name('auth.login')
         ->layout('layouts.auth');
 });
