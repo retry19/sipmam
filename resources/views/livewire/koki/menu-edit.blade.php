@@ -73,7 +73,10 @@
                 </div>
                 <div class="float-right">
                     <button class="btn btn-outline-secondary">Reset</button>&nbsp;
-                    <button wire:click="updateMenu" class="btn btn-primary">Simpan</button>
+                    <button wire:click="updateMenu" wire:target="updateMenu" wire:loading.attr="disabled" class="btn btn-primary">
+                        <span wire:loading wire:target="updateMenu" class="spinner-border spinner-border-sm" aria-hidden="true"></span>
+                        <span wire:target="updateMenu" wire:loading.remove>Simpan</span>
+                    </button>
                 </div>
             </div>
         </div>

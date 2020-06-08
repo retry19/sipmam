@@ -54,7 +54,7 @@
                     <div wire:click="$emit('menuSelected', {{ $menu->id }})" 
                         class="card {{ in_array($menu->id, $cart) ? 'active' : '' }}">
                 @endif
-                    <img src="{{ asset('img/foods/'.$menu->foto_menu) }}" class="card-img-top" alt="{{ $menu->nama_menu }}">
+                    <img src="{{ asset($menu->fotoMenuPath) }}" class="card-img-top" alt="{{ $menu->nama_menu }}">
                     <div class="card-body">
                         <h5 class="card-title">{{ $menu->nama_menu }}</h5>
                         <br>
