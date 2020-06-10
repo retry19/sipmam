@@ -30,12 +30,16 @@
     </div>
 </li>
 
-@section('js')
-    <script>
-        window.livewire.on('notifSound', () => {
+<script>
+    window.livewire.on('notifSound', () => {
+        let condition = true;
+        if (condition) {
             let sound = new Audio('http://localhost:8000/audio/juntos.ogg');
             
-            sound.play();
-        });
-    </script>
-@endsection
+            setTimeout(() => {
+                sound.play();
+            }, 2000)
+            condition = false;
+        }
+    });
+</script>
