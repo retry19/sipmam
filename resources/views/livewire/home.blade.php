@@ -65,14 +65,17 @@
                 </div>
             </div>
             <div class="row">
-                @foreach ($menus as $menu)
+                @if ($favoriteMenus->isEmpty())
+                    <p>Belum ada menu favorit ❤</p>
+                @endif
+                @foreach ($favoriteMenus as $item)
                     <div class="col-md-4 col-6">
                         <div class="card shadow">
-                            <img src="{{ asset($menu->fotoMenuPath) }}" class="card-img-top" alt="{{ $menu->nama_menu }}">
+                            <img src="{{ asset($item->menu->fotoMenuPath) }}" class="card-img-top" alt="{{ $item->menu->nama_menu }}">
                             <div class="card-body">
-                                <h5 class="card-title">{{ $menu->nama_menu }}</h5>
+                                <h5 class="card-title">{{ $item->menu->nama_menu }}</h5>
                                 <br>
-                                <footer>{{ $this->hargaFormat($menu->harga) }}</footer>
+                                <footer>{{ $this->hargaFormat($item->menu->harga) }}</footer>
                             </div>
                         </div>
                     </div>

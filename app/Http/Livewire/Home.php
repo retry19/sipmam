@@ -2,7 +2,7 @@
 
 namespace App\Http\Livewire;
 
-use App\Menu;
+use App\DetailPesanan;
 use Livewire\Component;
 
 class Home extends Component
@@ -14,8 +14,12 @@ class Home extends Component
 
     public function render()
     {
-        $menus = Menu::all();
+        $favoriteMenus = DetailPesanan::groupBy('menu_id')
+                        ->selectRaw('menu_id,SUM(jml_pesan) AS jml_pesan')
+                        ->orderBy('jml_pesan', 'desc')
+                        ->take(6)
+                        ->get();
 
-        return view('livewire.home', ['menus' => $menus]);
+        return view('livewire.home', ['favoriteMenus' => $favoriteMenus]);
     }
 }
