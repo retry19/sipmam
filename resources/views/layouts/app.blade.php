@@ -180,6 +180,14 @@
                   </p>
                 </a>
               </li>
+              <li class="nav-item">
+                <a href="{{ route('owner.akun-all') }}" class="nav-link @yield('akun')">
+                  <i class="nav-icon fas fa-user"></i>
+                  <p>
+                    Data Akun
+                  </p>
+                </a>
+              </li>
             @endif
 
             <li class="nav-header">OPTION</li>

@@ -45,6 +45,8 @@ Route::group(['middleware' => 'auth', 'prefix' => 'dashboard'], function () {
         Route::livewire('/pesanan', 'owner.pesanan-index')->name('owner.pesanan-all');
         Route::livewire('/transaksi', 'owner.transaksi-index')->name('owner.transaksi-all');
         Route::livewire('/menu', 'owner.menu-index')->name('owner.menu-all');
+        Route::livewire('/akun', 'owner.akun-index')->name('owner.akun-all');
+        Route::livewire('/akun/{id}/edit', 'owner.akun-edit')->name('owner.akun-edit');
     });
 
     Route::livewire('/notification', 'notification-list')->name('notif.all');
