@@ -66,7 +66,7 @@
             </div>
             <div class="row">
                 @if ($favoriteMenus->isEmpty())
-                    <p>Belum ada menu favorit ❤</p>
+                    <p class="mx-auto">Belum ada menu favorit ❤</p>
                 @endif
                 @foreach ($favoriteMenus as $item)
                     <div class="col-md-4 col-6">
