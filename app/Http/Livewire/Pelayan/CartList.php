@@ -29,6 +29,7 @@ class CartList extends Component
     {
         if ($this->noMeja != null) {
             $this->validNoMeja = Pesanan::whereDate('created_at', Carbon::today())
+                ->where('status', '<', 3)
                 ->where('no_meja', $this->noMeja)
                 ->count();
         }
