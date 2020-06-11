@@ -1,5 +1,5 @@
 <div>
-    <nav class="navbar navbar-expand-lg navbar-light bg-white mb-5">
+    <nav class="navbar navbar-expand-lg navbar-light bg-white mb-5 p-3">
         <div class="container">
             <a class="navbar-brand" href="/"><b>SIPMAM</b> 2020</a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
@@ -45,7 +45,7 @@
                     </span>
                 </div>
                 <div class="col-md-6 text-center">
-                    <h5>Pelayanan</h5>
+                    <h5 class="rating-pelayan">Pelayanan</h5>
                     <span>
                         <i class="fas fa-star active"></i>
                         <i class="fas fa-star active"></i>
@@ -66,7 +66,7 @@
             </div>
             <div class="row">
                 @foreach ($menus as $menu)
-                    <div class="col-md-4">
+                    <div class="col-md-4 col-6">
                         <div class="card shadow">
                             <img src="{{ asset($menu->fotoMenuPath) }}" class="card-img-top" alt="{{ $menu->nama_menu }}">
                             <div class="card-body">

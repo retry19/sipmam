@@ -16,14 +16,15 @@ body {
 }
 
 /* HALAMAN HOME */
+section.main {
+  text-align: center;
+}
 section.main h1 {
-  font-weight: 700;
-  font-size: 4rem;
   margin-bottom: .7em;
 }
 section.main a,
 section.ask a {
-  font-size: 1.5rem;
+  font-size: 1.2rem;
 }
 section.main a.btn,
 section.ask a.btn {
@@ -34,6 +35,9 @@ section.main a.btn.btn-warning,
 section.ask a.btn.btn-warning {
   border: none;
   background-color: var(--yellow-color);
+}
+section.main img {
+  margin-top: 60px;
 }
 
 section.rating {
@@ -68,13 +72,16 @@ section.rating i.active {
 section.favorit {
   margin: 180px 0;
 }
+section.rating .rating-pelayan {
+  margin-top: 40px;
+}
 section.favorit .card {
   border-radius: 20px;
   width: 100%;
 }
 section.favorit .card .card-img-top {
   object-fit: cover;
-  height: 240px;
+  height: 160px;
   border-radius: 20px;
 }
 section.favorit .card .card-body footer {
@@ -260,6 +267,29 @@ input[type=number]#totalBayar {
 }
 
 @media (min-width: 575px) {
+  section.main {
+    text-align: left;
+  }
+  section.main h1 {
+    font-weight: 700;
+    font-size: 4rem;
+  }
+  section.main a,
+  section.ask a {
+    font-size: 1.5rem;
+  }
+  section.main img {
+    margin-top: 0;
+  }
+
+  section.rating .rating-pelayan {
+    margin-top: 0;
+  }
+
+  section.favorit .card .card-img-top {
+    height: 240px;
+  }
+
   .list-order .card {
     margin-top: .9rem;
   }

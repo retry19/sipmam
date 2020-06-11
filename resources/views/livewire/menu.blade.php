@@ -28,7 +28,7 @@
         <section class="favorit">
             <div class="row">
                 @foreach ($menus as $menu)
-                    <div class="col-md-4">
+                    <div class="col-md-4 col-6">
                         <div class="card shadow">
                             <img src="{{ asset($menu->fotoMenuPath) }}" class="card-img-top" alt="{{ $menu->nama_menu }}">
                             <div class="card-body">
