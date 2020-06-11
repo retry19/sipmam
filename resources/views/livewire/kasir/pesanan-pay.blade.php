@@ -118,19 +118,9 @@
 </div>
 
 <script>
-    function inputBayar() {
-        let totalBayar = document.getElementById('totalBayar').value;
-        console.log(totalBayar);
-    }
-    
-    let input = document.getElementById('totalBayar');
-    let totalHargaWithTax = document.getElementById('totalHargaWithTax').value;
-    let kembali = document.getElementById('kembali');
-
-    input.addEventListener('keyup', function () {
-        kembali.value = input.value - totalHargaWithTax;
+    document.getElementById('totalBayar').addEventListener('keyup', function () {
+        document.getElementById('kembali').value = document.getElementById('totalBayar').value - document.getElementById('totalHargaWithTax').value;
     });
-    
 </script>
 
 @section('title', 'Pembayaran')
